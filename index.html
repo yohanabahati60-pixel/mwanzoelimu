@@ -1,0 +1,3105 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MwanzoElimu • Notes, Past Papers & Daily Quizzes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --forest: #0a3d2e;
+            --green: #14532d;
+            --lime: #84cc16;
+            --lime-bright: #bef264;
+            --navy: #0f172a;
+            --ink: #1a1a2e;
+            --cream: #fafaf7;
+            --white: #ffffff;
+            --glass: rgba(255,255,255,0.07);
+            --glass-border: rgba(255,255,255,0.12);
+            --text-muted: #94a3b8;
+            --card-bg: #0e2a1f;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--cream);
+            color: var(--navy);
+            overflow-x: hidden;
+        }
+
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--lime); border-radius: 99px; }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 0 2rem;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 61, 46, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.3s;
+        }
+
+        .nav-logo {
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--lime), #22c55e);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .nav-logo-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo-text span { color: var(--lime-bright); }
+
+        .nav-links {
+            display: flex; gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .nav-links a:hover { color: var(--lime-bright); }
+
+        .nav-actions {
+            display: flex; gap: 12px; align-items: center;
+        }
+
+        .btn-ghost {
+            padding: 8px 20px;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            transition: all 0.2s;
+        }
+        .btn-ghost:hover { border-color: var(--lime); color: var(--lime); }
+
+        .btn-primary {
+            padding: 9px 22px;
+            background: var(--lime);
+            color: var(--forest);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover { background: var(--lime-bright); transform: translateY(-1px); }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            background: var(--forest);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 68px;
+        }
+
+        /* Animated orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: drift 12s ease-in-out infinite;
+        }
+        .orb-1 { width: 500px; height: 500px; background: #166534; top: -100px; right: -100px; animation-delay: 0s; }
+        .orb-2 { width: 350px; height: 350px; background: #84cc16; bottom: -80px; left: 5%; animation-delay: -4s; }
+        .orb-3 { width: 250px; height: 250px; background: #15803d; top: 40%; left: 40%; animation-delay: -8s; }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -30px); }
+            66% { transform: translate(-20px, 20px); }
+        }
+
+        /* Grid overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(132, 204, 22, 0.15);
+            border: 1px solid rgba(132, 204, 22, 0.3);
+            color: var(--lime);
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--lime);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+        .hero-h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 800;
+            color: white;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s 0.1s ease both;
+        }
+
+        .hero-h1 em {
+            font-style: normal;
+            color: var(--lime-bright);
+            position: relative;
+        }
+
+        .hero-h1 em::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 3px;
+            background: var(--lime);
+            border-radius: 2px;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: rgba(255,255,255,0.65);
+            max-width: 580px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.8s 0.2s ease both;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 3.5rem;
+            animation: fadeUp 0.8s 0.3s ease both;
+        }
+
+        .btn-hero-main {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: var(--lime);
+            color: var(--forest);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 0 40px rgba(132,204,22,0.3);
+        }
+        .btn-hero-main:hover { background: var(--lime-bright); transform: translateY(-2px); box-shadow: 0 0 60px rgba(132,204,22,0.5); }
+
+        .btn-hero-sec {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            backdrop-filter: blur(8px);
+        }
+        .btn-hero-sec:hover { border-color: var(--lime); color: var(--lime); background: rgba(132,204,22,0.08); }
+
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            animation: fadeUp 0.8s 0.4s ease both;
+        }
+
+        .hero-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+            padding: 7px 16px;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Floating card on hero right */
+        .hero-right {
+            display: none;
+        }
+        @media(min-width:900px){
+            .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
+            .hero-right { display: block; }
+        }
+
+        .floating-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+            animation: floatY 4s ease-in-out infinite;
+        }
+
+        @keyframes floatY { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);} }
+
+        .mini-quiz-preview {
+            color: white;
+        }
+
+        .mini-quiz-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--lime);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .mini-quiz-q {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .mini-opt {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.75);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .mini-opt.correct {
+            background: rgba(132,204,22,0.15);
+            border-color: rgba(132,204,22,0.4);
+            color: var(--lime-bright);
+        }
+
+        .mini-opt-dot {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.65rem;
+        }
+
+        .score-bar {
+            margin-top: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 99px;
+            height: 6px;
+            overflow: hidden;
+        }
+        .score-fill {
+            height: 100%;
+            width: 78%;
+            background: linear-gradient(90deg, var(--lime), #22c55e);
+            border-radius: 99px;
+        }
+
+        /* ─── STATS STRIP ─── */
+        .stats-strip {
+            background: var(--navy);
+            padding: 3rem 2rem;
+        }
+
+        .stats-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+        }
+        @media(min-width:768px){ .stats-inner { grid-template-columns: repeat(4, 1fr); } }
+
+        .stat-box {
+            padding: 2rem;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.07);
+        }
+        .stat-box:last-child { border-right: none; }
+
+        .stat-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--lime-bright);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ─── SECTION BASE ─── */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .section-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--lime);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .section-h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--navy);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            color: #64748b;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 520px;
+            margin-bottom: 3rem;
+        }
+
+        /* ─── FOR STUDENTS / TEACHERS ─── */
+        .dual-section { background: white; }
+
+        .dual-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        @media(min-width:768px){ .dual-grid { grid-template-columns: 1fr 1fr; } }
+
+        .dual-card {
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .dual-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+
+        .dual-card.green {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+
+        .dual-card.blue {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        }
+
+        .dual-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .dual-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.925rem;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .check-green { color: #16a34a; font-size: 0.875rem; margin-top: 2px; flex-shrink: 0; }
+        .check-blue  { color: #2563eb; font-size: 0.875rem; margin-top: 2px; flex-shrink: 0; }
+
+        .btn-green {
+            display: inline-block;
+            padding: 13px 28px;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-green:hover { background: #15803d; transform: translateY(-1px); }
+
+        .btn-blue {
+            display: inline-block;
+            padding: 13px 28px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-blue:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+        /* ─── SUBJECTS ─── */
+        .subjects-section { background: var(--forest); }
+        .subjects-section .section-h2 { color: white; }
+        .subjects-section .section-sub { color: rgba(255,255,255,0.6); }
+        .subjects-section .section-tag { color: var(--lime); }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        @media(min-width:768px){ .subjects-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .subject-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 1.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .subject-card:hover {
+            border-color: var(--lime);
+            background: rgba(132,204,22,0.08);
+            transform: translateY(-3px);
+        }
+
+        .subject-card:hover::before { opacity: 1; }
+
+        .subject-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .subject-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .subject-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .subject-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--lime);
+            background: rgba(132,204,22,0.12);
+            border: 1px solid rgba(132,204,22,0.2);
+            padding: 3px 10px;
+            border-radius: 99px;
+        }
+
+        .subject-desc {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+
+        /* ─── CONTENT LIBRARY ─── */
+        .library-section { background: white; }
+
+        .library-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        @media(min-width:768px){ .library-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .lib-card {
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .lib-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-color: var(--lime); }
+
+        .lib-card-accent {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+        }
+        .lib-card-accent.g { background: linear-gradient(90deg, #16a34a, #84cc16); }
+        .lib-card-accent.b { background: linear-gradient(90deg, #2563eb, #7c3aed); }
+        .lib-card-accent.o { background: linear-gradient(90deg, #ea580c, #f59e0b); }
+
+        .lib-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .lib-card h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .lib-card p { font-size: 0.9rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem; }
+
+        .lib-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .lib-list li { font-size: 0.85rem; color: #374151; display: flex; align-items: center; gap: 8px; }
+        .lib-list li::before { content: '✓'; color: #16a34a; font-weight: 700; }
+
+        .lib-list a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--forest);
+            font-weight: 600;
+            text-decoration: none;
+            padding: 7px 12px;
+            border-radius: 8px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            margin-bottom: 6px;
+            transition: all 0.2s;
+        }
+        .lib-list a::before { content: '📄'; font-size: 0.85rem; }
+        .lib-list a:hover { background: #dcfce7; border-color: #86efac; transform: translateX(3px); }
+
+        .lib-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: var(--forest);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .lib-btn:hover { background: var(--green); }
+
+        /* ─── QUIZ SECTION ─── */
+        #quiz-section {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--forest) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #quiz-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .quiz-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .quiz-header .section-h2 { color: white; margin-bottom: 0.5rem; }
+        .quiz-header p { color: rgba(255,255,255,0.6); }
+
+        .quiz-card {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-progress-text {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600;
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 99px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--lime), #22c55e);
+            border-radius: 99px;
+            transition: width 0.5s ease;
+        }
+
+        #question {
+            font-size: 1.05rem;
+            color: white;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 1.75rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .quiz-opt-btn {
+            width: 100%;
+            text-align: left;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .quiz-opt-btn:hover {
+            background: rgba(132,204,22,0.12);
+            border-color: rgba(132,204,22,0.4);
+            color: var(--lime-bright);
+            transform: translateX(4px);
+        }
+
+        #result {
+            text-align: center;
+            color: white;
+        }
+
+        #result h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        #result .big-score {
+            font-family: 'Syne', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--lime-bright);
+            line-height: 1;
+        }
+
+        .retry-btn {
+            margin-top: 1.5rem;
+            padding: 14px 36px;
+            background: var(--lime);
+            color: var(--forest);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .retry-btn:hover { background: var(--lime-bright); }
+
+        /* ─── TESTIMONIALS ─── */
+        .testimonials-section { background: var(--cream); }
+
+        .testimonials-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        @media(min-width:768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .testi-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        .testi-card:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.07); }
+
+        .testi-stars { color: #f59e0b; font-size: 0.875rem; margin-bottom: 1rem; }
+
+        .testi-text {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testi-avatar {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .testi-name { font-weight: 700; font-size: 0.875rem; color: var(--navy); }
+        .testi-role { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+
+        /* ─── BLOG ─── */
+        .blog-section { background: white; }
+
+        .blog-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        @media(min-width:768px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .blog-card {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        .blog-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+
+        .blog-thumb {
+            height: 160px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem;
+        }
+        .blog-thumb.purple { background: linear-gradient(135deg, #6d28d9, #a855f7); }
+        .blog-thumb.blue   { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+        .blog-thumb.green  { background: linear-gradient(135deg, #15803d, #22c55e); }
+
+        .blog-body { padding: 1.5rem; }
+
+        .blog-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+        .blog-tag.purple { color: #7c3aed; }
+        .blog-tag.blue   { color: #2563eb; }
+        .blog-tag.green  { color: #16a34a; }
+
+        .blog-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 0.5rem 0 0.75rem;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        .blog-excerpt { font-size: 0.85rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem; }
+
+        .blog-read { font-size: 0.825rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+        .blog-read.purple { color: #7c3aed; }
+        .blog-read.blue   { color: #2563eb; }
+        .blog-read.green  { color: #16a34a; }
+
+        /* ─── PRICING ─── */
+        .pricing-section { background: var(--cream); }
+
+        .pricing-grid {
+            display: grid;
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+        @media(min-width:768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .price-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+
+        .price-card.featured {
+            border-color: var(--lime);
+            background: linear-gradient(135deg, var(--forest), var(--green));
+            box-shadow: 0 0 0 1px var(--lime), 0 20px 60px rgba(132,204,22,0.2);
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -14px; left: 50%; transform: translateX(-50%);
+            background: var(--lime);
+            color: var(--forest);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 5px 18px;
+            border-radius: 99px;
+            white-space: nowrap;
+        }
+
+        .price-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+        }
+        .price-card.featured .price-name { color: rgba(255,255,255,0.5); }
+
+        .price-amount {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.03em;
+        }
+        .price-card.featured .price-amount { color: white; }
+
+        .price-period { font-size: 0.8rem; color: #94a3b8; margin-bottom: 2rem; }
+        .price-card.featured .price-period { color: rgba(255,255,255,0.5); }
+
+        .price-divider { height: 1px; background: #e2e8f0; margin-bottom: 1.5rem; }
+        .price-card.featured .price-divider { background: rgba(255,255,255,0.1); }
+
+        .price-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            flex: 1;
+            margin-bottom: 2rem;
+        }
+
+        .price-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+        .price-card.featured .price-feature { color: rgba(255,255,255,0.8); }
+
+        .price-feature .on  { color: #16a34a; }
+        .price-feature .off { color: #d1d5db; }
+        .price-card.featured .price-feature .on { color: var(--lime); }
+
+        .btn-price {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-price-outline {
+            background: transparent;
+            border: 1.5px solid #e2e8f0;
+            color: var(--navy);
+        }
+        .btn-price-outline:hover { border-color: var(--green); color: var(--green); }
+
+        .btn-price-lime {
+            background: var(--lime);
+            color: var(--forest);
+        }
+        .btn-price-lime:hover { background: var(--lime-bright); }
+
+        .btn-price-ghost {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+        .btn-price-ghost:hover { background: rgba(255,255,255,0.18); }
+
+        /* ─── TRUST ─── */
+        .trust-section {
+            background: var(--navy);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .trust-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 2rem;
+        }
+
+        .trust-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4rem;
+        }
+
+        .trust-item { text-align: center; }
+        .trust-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+        }
+        .trust-sub { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+        /* ─── FAQ ─── */
+        #faq { background: white; }
+
+        .faq-grid {
+            display: grid;
+            gap: 1rem;
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .faq-q {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--navy);
+            gap: 1rem;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .faq-q:hover { background: #f8fafc; }
+
+        .faq-icon {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+            color: var(--navy);
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .faq-a {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.25rem; }
+        .faq-item.open .faq-icon { background: var(--lime); color: var(--forest); transform: rotate(45deg); }
+
+        /* ─── CTA SECTION ─── */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--forest), #1a3a2a);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(132,204,22,0.15) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cta-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+
+        .cta-h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .cta-h2 span { color: var(--lime-bright); }
+
+        .cta-sub { color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 2.5rem; line-height: 1.6; }
+
+        .cta-btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.6);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            gap: 3rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 3rem;
+        }
+        @media(min-width:768px) { .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+
+        .footer-brand p { font-size: 0.875rem; line-height: 1.6; margin: 1rem 0; }
+
+        .footer-socials { display: flex; gap: 10px; margin-top: 1rem; }
+        .footer-social {
+            width: 34px; height: 34px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.07);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .footer-social:hover { background: var(--lime); color: var(--forest); }
+
+        .footer-col h5 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--lime); }
+
+        .footer-divider { height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 2rem; }
+
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* ─── MOBILE NAV ─── */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px; height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        @media(max-width:768px) {
+            .hamburger { display: flex; }
+            .nav-links-wrap { display: none; }
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ─── SCROLLTOP ─── */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px; height: 44px;
+            background: var(--lime);
+            color: var(--forest);
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(132,204,22,0.4);
+            z-index: 99;
+        }
+        .scroll-top.visible { opacity: 1; pointer-events: all; }
+        .scroll-top:hover { transform: scale(1.1); }
+
+        /* responsive */
+        @media(max-width:600px) {
+            .stats-inner { grid-template-columns: 1fr 1fr; }
+            .stat-box { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+        }
+
+        /* ─── RESPONSIVE MOBILE ─── */
+        @media(max-width:480px){
+            .hero-h1{font-size:2.3rem;}
+            .hero-cta{flex-direction:column;}
+            .btn-hero-main,.btn-hero-sec{width:100%;justify-content:center;}
+            .section-h2{font-size:1.8rem;}
+            .quiz-card{padding:1.5rem;}
+            .price-card{padding:1.75rem;}
+            .dual-card{padding:1.75rem;}
+            .cta-btns{flex-direction:column;align-items:center;}
+            nav{padding:0 1rem;}
+        }
+
+        /* ─── NAV ICON BUTTONS ─── */
+        .nav-icon-btn{
+            width:36px;height:36px;border-radius:8px;
+            border:1px solid rgba(255,255,255,0.22);
+            background:transparent;color:white;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            font-size:0.85rem;font-weight:700;transition:all 0.2s;flex-shrink:0;
+        }
+        .nav-icon-btn:hover{border-color:var(--lime);color:var(--lime);}
+        @media(max-width:768px){
+            .nav-actions .btn-ghost,.nav-actions .btn-primary{display:none;}
+        }
+
+        /* ─── HAMBURGER ANIMATION ─── */
+        .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+        .hamburger.open span:nth-child(2){opacity:0;}
+        .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+        /* ─── MOBILE DRAWER ─── */
+        .mobile-drawer{
+            display:none;
+            position:fixed;top:68px;left:0;right:0;bottom:0;
+            background:rgba(5,30,20,0.97);backdrop-filter:blur(20px);
+            z-index:98;flex-direction:column;padding:1.5rem;
+            overflow-y:auto;
+        }
+        .mobile-drawer.open{display:flex;}
+        .m-nav-links{list-style:none;margin-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:1rem;}
+        .m-nav-links li a{
+            display:block;padding:0.85rem 0;
+            color:rgba(255,255,255,0.8);text-decoration:none;
+            font-size:1rem;font-weight:600;
+            border-bottom:1px solid rgba(255,255,255,0.06);
+            transition:color 0.2s;
+        }
+        .m-nav-links li a:hover{color:var(--lime-bright);}
+        .m-actions{display:flex;flex-direction:column;gap:10px;}
+        .m-actions button{
+            width:100%;padding:13px;font-size:0.95rem;font-weight:700;
+            border-radius:10px;cursor:pointer;transition:all 0.2s;
+            font-family:'Plus Jakarta Sans',sans-serif;
+        }
+        .m-row{display:flex;gap:10px;margin-top:0.5rem;}
+        .m-row button{flex:1;height:44px;font-size:0.8rem;}
+
+        /* ─── WHATSAPP FLOAT ─── */
+        .wa-float{
+            position:fixed;bottom:5.5rem;right:1.5rem;z-index:98;
+            width:52px;height:52px;border-radius:50%;
+            background:#25D366;border:none;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            font-size:1.5rem;box-shadow:0 4px 24px rgba(37,211,102,0.45);
+            transition:transform 0.2s;
+        }
+        .wa-float:hover{transform:scale(1.1);}
+
+        /* ══════ DARK MODE ══════ */
+        body.dark{background:#0a110d;color:#e2e8f0;}
+        body.dark nav{background:rgba(5,20,12,0.92);}
+        body.dark .dual-section,
+        body.dark .library-section,
+        body.dark .blog-section,
+        body.dark #faq{background:#0d1a10;}
+        body.dark .testimonials-section,
+        body.dark .pricing-section{background:#0a1209;}
+        body.dark .dual-card,body.dark .lib-card,body.dark .testi-card,
+        body.dark .blog-card,body.dark .price-card,body.dark .faq-item{
+            background:#112218;border-color:rgba(255,255,255,0.1);
+        }
+        body.dark .blog-body{background:#112218;}
+        body.dark .dual-card h3,body.dark .section-h2,
+        body.dark .lib-card h4,body.dark .testi-name,
+        body.dark .blog-title,body.dark .price-amount,
+        body.dark .faq-q{color:#e2e8f0 !important;}
+        body.dark .section-sub,body.dark .lib-card p,
+        body.dark .testi-text,body.dark .blog-excerpt,
+        body.dark .faq-a{color:#94a3b8 !important;}
+        body.dark .feature-list li,body.dark .lib-list li,
+        body.dark .price-feature{color:#cbd5e1;}
+        body.dark .faq-q:hover{background:#162b1e;}
+        body.dark .faq-icon{background:#1a3a24;color:#e2e8f0;}
+        body.dark .price-divider{background:rgba(255,255,255,0.1);}
+        body.dark .btn-price-outline{background:transparent;border-color:rgba(255,255,255,0.2);color:#e2e8f0;}
+        body.dark .price-name{color:#94a3b8 !important;}
+        body.dark .price-period{color:#64748b;}
+        /* login modal dark */
+        body.dark #loginModal > div > div{background:#0d1f14 !important;border-color:rgba(255,255,255,0.1) !important;}
+        body.dark #loginModal h1,body.dark #loginModal h2{color:#e2e8f0 !important;}
+        body.dark #loginModal p{color:#94a3b8 !important;}
+        body.dark #loginModal label{color:#94a3b8 !important;}
+        body.dark #loginModal input[type=tel],body.dark #loginModal input[type=text]{
+            background:#112218 !important;border-color:rgba(255,255,255,0.15) !important;color:#e2e8f0 !important;
+        }
+
+
+        /* ─── DOCUMENT MODAL ─── */
+        #docModal{
+            display:none;position:fixed;inset:0;
+            background:rgba(0,0,0,0.65);z-index:999998;
+            align-items:flex-start;justify-content:center;
+            padding:1rem;overflow-y:auto;
+        }
+        #docModal.open{display:flex;}
+        .doc-container{
+            width:100%;max-width:780px;
+            background:#fff;border-radius:1.5rem;
+            box-shadow:0 30px 80px rgba(0,0,0,0.25);
+            margin:2rem auto;overflow:hidden;
+            font-family:'Plus Jakarta Sans',sans-serif;
+        }
+        body.dark .doc-container{background:#0d1f14;border:1px solid rgba(255,255,255,0.1);}
+        .doc-header{
+            background:linear-gradient(135deg,#0a3d2e,#14532d);
+            padding:2rem 2rem 1.5rem;
+            display:flex;align-items:center;justify-content:space-between;
+        }
+        .doc-header-left{display:flex;align-items:center;gap:1rem;}
+        .doc-icon{
+            width:48px;height:48px;border-radius:12px;
+            background:rgba(255,255,255,0.12);
+            display:flex;align-items:center;justify-content:center;
+            font-size:1.4rem;flex-shrink:0;
+        }
+        .doc-title{color:#fff;font-size:1.3rem;font-weight:800;margin:0;}
+        .doc-subtitle{color:rgba(255,255,255,0.6);font-size:0.8rem;margin:0.2rem 0 0;}
+        .doc-close{
+            width:36px;height:36px;border-radius:8px;
+            background:rgba(255,255,255,0.12);border:none;
+            color:#fff;cursor:pointer;font-size:1.1rem;
+            display:flex;align-items:center;justify-content:center;
+            transition:background 0.2s;flex-shrink:0;
+        }
+        .doc-close:hover{background:rgba(255,255,255,0.22);}
+        .doc-body{padding:2rem;line-height:1.8;color:#334155;}
+        body.dark .doc-body{color:#94a3b8;}
+        .doc-body h2{
+            font-size:1.1rem;font-weight:800;color:#0a3d2e;
+            margin:1.8rem 0 0.6rem;padding-bottom:0.4rem;
+            border-bottom:2px solid #dcfce7;
+        }
+        body.dark .doc-body h2{color:#84cc16;border-color:#1a3a24;}
+        .doc-body h3{font-size:0.95rem;font-weight:700;color:#14532d;margin:1.2rem 0 0.4rem;}
+        body.dark .doc-body h3{color:#bef264;}
+        .doc-body p{font-size:0.9rem;margin:0 0 0.8rem;color:#475569;}
+        body.dark .doc-body p{color:#94a3b8;}
+        .doc-body ul{padding-left:1.2rem;margin:0.5rem 0 1rem;}
+        .doc-body ul li{font-size:0.88rem;color:#475569;margin-bottom:0.4rem;}
+        body.dark .doc-body ul li{color:#94a3b8;}
+        .doc-badge{
+            display:inline-block;background:#dcfce7;color:#15803d;
+            font-size:0.7rem;font-weight:700;padding:3px 10px;
+            border-radius:99px;margin-left:8px;vertical-align:middle;
+        }
+        body.dark .doc-badge{background:#1a3a24;color:#84cc16;}
+        .doc-highlight{
+            background:#f0fdf4;border-left:4px solid #16a34a;
+            border-radius:0 8px 8px 0;padding:1rem 1.2rem;
+            margin:1rem 0;
+        }
+        body.dark .doc-highlight{background:#112218;border-color:#16a34a;}
+        .doc-highlight p{margin:0;font-size:0.88rem;}
+        .doc-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;}
+        @media(max-width:480px){.doc-contact-grid{grid-template-columns:1fr;}}
+        .doc-contact-card{
+            background:#f8fafc;border:1px solid #e2e8f0;
+            border-radius:12px;padding:1rem;text-align:center;
+        }
+        body.dark .doc-contact-card{background:#112218;border-color:rgba(255,255,255,0.1);}
+        .doc-contact-card .icon{font-size:1.6rem;margin-bottom:0.4rem;}
+        .doc-contact-card h4{font-size:0.85rem;font-weight:700;color:#0a3d2e;margin:0 0 0.3rem;}
+        body.dark .doc-contact-card h4{color:#bef264;}
+        .doc-contact-card a{color:#16a34a;font-size:0.82rem;font-weight:600;text-decoration:none;}
+        .doc-contact-card a:hover{text-decoration:underline;}
+        .doc-career-card{
+            background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;
+            padding:1rem 1.2rem;margin:0.75rem 0;
+            display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+        }
+        body.dark .doc-career-card{background:#112218;border-color:rgba(255,255,255,0.1);}
+        .doc-career-card h4{font-size:0.9rem;font-weight:700;color:#1e293b;margin:0 0 0.2rem;}
+        body.dark .doc-career-card h4{color:#e2e8f0;}
+        .doc-career-card p{font-size:0.78rem;color:#64748b;margin:0;}
+        .doc-career-btn{
+            background:#16a34a;color:#fff;border:none;
+            padding:7px 16px;border-radius:8px;font-size:0.78rem;
+            font-weight:700;cursor:pointer;white-space:nowrap;
+            font-family:'Plus Jakarta Sans',sans-serif;
+        }
+        .doc-footer{
+            padding:1.25rem 2rem;
+            background:#f8fafc;border-top:1px solid #e2e8f0;
+            text-align:center;
+        }
+        body.dark .doc-footer{background:#0a1209;border-color:rgba(255,255,255,0.08);}
+        .doc-footer p{font-size:0.78rem;color:#94a3b8;margin:0;}
+        .doc-last-updated{
+            font-size:0.72rem;color:#94a3b8;text-align:right;
+            margin-top:-0.5rem;margin-bottom:1rem;
+        }
+
+    </style>
+    <!-- Tailwind kwa Modal ya Jiunge -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Modal Overlay */
+        #joinModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        #joinModal.open { display: flex; }
+        .join-loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #25D366;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: joinSpin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes joinSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+<body>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">📚</div>
+        <span class="nav-logo-text">Mwanzo<span>Elimu</span></span>
+    </a>
+    <div class="nav-links-wrap">
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#wanafunzi" data-sw="Wanafunzi" data-en="Students">Wanafunzi</a></li>
+            <li><a href="#subjects" data-sw="Subjects" data-en="Subjects">Subjects</a></li>
+            <li><a href="#quiz-section" data-sw="Quiz" data-en="Quiz">Quiz</a></li>
+            <li><a href="#pricing" data-sw="Bei" data-en="Pricing">Bei</a></li>
+            <li><a href="#faq" data-sw="FAQ" data-en="FAQ">FAQ</a></li>
+        </ul>
+    </div>
+    <div class="nav-actions">
+        <button class="nav-icon-btn" id="langBtn" onclick="toggleLang()" title="Badili Lugha">SW</button>
+        <button class="nav-icon-btn" id="darkBtn" onclick="toggleDark()" title="Dark Mode">🌙</button>
+        <button class="btn-ghost" id="loginNavBtn" onclick="openLoginModal()" data-sw="Ingia" data-en="Login">Ingia</button>
+        <button class="btn-primary" onclick="openJoinModal()" data-sw="Jiunge Bure" data-en="Join Free">Jiunge Bure</button>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+    <ul class="m-nav-links">
+        <li><a href="#wanafunzi" onclick="closeDrawer()" data-sw="Wanafunzi" data-en="Students">Wanafunzi</a></li>
+        <li><a href="#subjects" onclick="closeDrawer()" data-sw="Subjects" data-en="Subjects">Subjects</a></li>
+        <li><a href="#quiz-section" onclick="closeDrawer()" data-sw="Quiz" data-en="Quiz">Quiz</a></li>
+        <li><a href="#pricing" onclick="closeDrawer()" data-sw="Bei" data-en="Pricing">Bei</a></li>
+        <li><a href="#faq" onclick="closeDrawer()" data-sw="FAQ" data-en="FAQ">FAQ</a></li>
+    </ul>
+    <div class="m-actions">
+        <button class="btn-ghost" id="mLoginBtn" onclick="openLoginModal();closeDrawer();" data-sw="Ingia" data-en="Login">Ingia</button>
+        <button class="btn-primary" onclick="openJoinModal();closeDrawer();" data-sw="Jiunge Bure" data-en="Join Free">Jiunge Bure</button>
+        <div class="m-row">
+            <button class="nav-icon-btn" id="mLangBtn" onclick="toggleLang()">SW → EN</button>
+            <button class="nav-icon-btn" id="mDarkBtn" onclick="toggleDark()">🌙 Dark</button>
+        </div>
+    </div>
+</div>
+
+<!-- WHATSAPP FLOAT BUTTON -->
+<a class="wa-float" href="https://wa.me/255743548225" target="_blank" rel="noopener" title="Wasiliana WhatsApp">💬</a>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-content">
+        <div class="hero-grid">
+            <div>
+                <div class="hero-tag">🏆 Tanzania's #1 Edu Platform</div>
+                <h1 class="hero-h1">
+                    Maandalizi ya<br>
+                    <em>NECTA yako</em><br>
+                    kila siku
+                </h1>
+                <p class="hero-sub">
+                    Notes, Past Papers & Daily Quizzes – platform ya kwanza Tanzania inayofanya wanafunzi na walimu wafaulu NECTA. TIE syllabus mpya • Offline mode • Gamification
+                </p>
+                <div class="hero-cta">
+                    <button class="btn-hero-main" onclick="document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'})">
+                        🎯 Anza Daily Quiz Leo
+                    </button>
+                    <button class="btn-hero-sec" onclick="alert('Premium inagharimu TZS 10,000/mwezi tu!')">
+                        ⭐ Premium — Bure mwezi 1
+                    </button>
+                </div>
+                <div class="hero-pills">
+                    <span class="hero-pill">✅ 45,000+ Wanafunzi</span>
+                    <span class="hero-pill">🏆 NECTA Certified</span>
+                    <span class="hero-pill">📱 Offline Mode</span>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="floating-card">
+                    <div class="mini-quiz-preview">
+                        <div class="mini-quiz-label">🎯 Daily Quiz — Commerce</div>
+                        <div class="mini-quiz-q">Which set of economic activities is an example of tertiary production?</div>
+                        <div class="mini-opt"><div class="mini-opt-dot">A</div> Hair dressing, baking bread and banking</div>
+                        <div class="mini-opt"><div class="mini-opt-dot">B</div> Car manufacturing, banking</div>
+                        <div class="mini-opt correct"><div class="mini-opt-dot">✓</div> Teaching, banking and transporting</div>
+                        <div class="mini-opt"><div class="mini-opt-dot">D</div> Copper mining, oil refining</div>
+                        <div style="margin-top:1rem; display:flex; justify-content:space-between; font-size:0.75rem; color:rgba(255,255,255,0.45);">
+                            <span>Alama yako</span><span style="color:var(--lime-bright);">78%</span>
+                        </div>
+                        <div class="score-bar"><div class="score-fill"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- STATS -->
+<div class="stats-strip">
+    <div class="stats-inner">
+        <div class="stat-box reveal">
+            <div class="stat-num">45K+</div>
+            <div class="stat-label">Wanafunzi active kila siku</div>
+        </div>
+        <div class="stat-box reveal">
+            <div class="stat-num">1,200+</div>
+            <div class="stat-label">Walimu wanaotumia</div>
+        </div>
+        <div class="stat-box reveal">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Past Papers na Solutions</div>
+        </div>
+        <div class="stat-box reveal">
+            <div class="stat-num">98%</div>
+            <div class="stat-label">Success Rate ya users</div>
+        </div>
+    </div>
+</div>
+
+<!-- FOR STUDENTS & TEACHERS -->
+<section class="dual-section" id="wanafunzi">
+    <div class="container">
+        <span class="section-tag">Kwa Kila Mtu</span>
+        <h2 class="section-h2">Imeboreshwa kwa<br>Wanafunzi na Walimu</h2>
+        <p class="section-sub">Platform moja inayojibu mahitaji ya wote – kutoka maandalizi ya mtihani hadi usimamizi wa darasa.</p>
+        <div class="dual-grid">
+            <div class="dual-card green reveal" id="students">
+                <span class="dual-card-icon">🎓</span>
+                <h3>Kwa Wanafunzi</h3>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle check-green"></i> <span><strong>Notes za subject zote</strong> (Form 1–6 & Primary)</span></li>
+                    <li><i class="fas fa-check-circle check-green"></i> <span><strong>Past Papers + Solutions</strong> (2000–2026)</span></li>
+                    <li><i class="fas fa-check-circle check-green"></i> <span><strong>Daily Quiz + Progress Tracker</strong> wa kina</span></li>
+                    <li><i class="fas fa-check-circle check-green"></i> <span><strong>Predicted NECTA Score</strong> accurate</span></li>
+                    <li><i class="fas fa-check-circle check-green"></i> <span><strong>Offline Mode</strong> — soma popote, wakati wowote</span></li>
+                    <li><i class="fas fa-check-circle check-green"></i> <span><strong>Video tutorials</strong> kwa topics ngumu</span></li>
+                </ul>
+                <button class="btn-green" onclick="openJoinModal()">Jiunge sasa — Wanafunzi</button>
+            </div>
+            <div class="dual-card blue reveal" id="walimu">
+                <span class="dual-card-icon">👨‍🏫</span>
+                <h3>Kwa Walimu</h3>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle check-blue"></i> <span><strong>Schemes of Work & Lesson Plans</strong> (TIE format)</span></li>
+                    <li><i class="fas fa-check-circle check-blue"></i> <span><strong>Class Management Dashboard</strong> wa kisasa</span></li>
+                    <li><i class="fas fa-check-circle check-blue"></i> <span><strong>Auto-generate Tests & Reports</strong> kwa sekunde</span></li>
+                    <li><i class="fas fa-check-circle check-blue"></i> <span><strong>Mark upload & analysis</strong> ya kina</span></li>
+                    <li><i class="fas fa-check-circle check-blue"></i> <span><strong>Offline Mode</strong> kwa shule za vijijini</span></li>
+                    <li><i class="fas fa-check-circle check-blue"></i> <span><strong>Student progress analytics</strong> live</span></li>
+                </ul>
+                <button class="btn-blue" onclick="openJoinModal()">Jiunge sasa — Walimu</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SUBJECTS -->
+<section class="subjects-section" id="subjects">
+    <div class="container">
+        <span class="section-tag">Masomo</span>
+        <h2 class="section-h2">Subject Library</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.55);">Maandalizi kamili kwa subjects zote — Form 1 hadi Form 6 na Primary.</p>
+        <div class="subjects-grid">
+            <div class="subject-card reveal">
+                <span class="subject-icon">📐</span>
+                <div class="subject-name">Mathematics</div>
+                <div class="subject-tags">
+                    <span class="subject-tag">450+ Notes</span>
+                    <span class="subject-tag">120 Past Papers</span>
+                </div>
+                <div class="subject-desc">Algebra, Geometry, Calculus, Statistics</div>
+            </div>
+            <div class="subject-card reveal">
+                <span class="subject-icon">📖</span>
+                <div class="subject-name">English Language</div>
+                <div class="subject-tags">
+                    <span class="subject-tag">350+ Notes</span>
+                    <span class="subject-tag">95 Past Papers</span>
+                </div>
+                <div class="subject-desc">Grammar, Literature, Composition, Comprehension</div>
+            </div>
+            <div class="subject-card reveal">
+                <span class="subject-icon">🗣️</span>
+                <div class="subject-name">Kiswahili</div>
+                <div class="subject-tags">
+                    <span class="subject-tag">380+ Notes</span>
+                    <span class="subject-tag">100 Past Papers</span>
+                </div>
+                <div class="subject-desc">Sarufi, Fasihi, Insha, Kusoma Kuelewa</div>
+            </div>
+            <div class="subject-card reveal">
+                <span class="subject-icon">🔬</span>
+                <div class="subject-name">Biology & Chemistry</div>
+                <div class="subject-tags">
+                    <span class="subject-tag">500+ Notes</span>
+                    <span class="subject-tag">140 Past Papers</span>
+                </div>
+                <div class="subject-desc">Photosynthesis, Cells, Reactions, Periodic Table</div>
+            </div>
+            <div class="subject-card reveal">
+                <span class="subject-icon">🌍</span>
+                <div class="subject-name">History & Geography</div>
+                <div class="subject-tags">
+                    <span class="subject-tag">420+ Notes</span>
+                    <span class="subject-tag">110 Past Papers</span>
+                </div>
+                <div class="subject-desc">Tanzania History, World Events, Climate, Maps</div>
+            </div>
+            <div class="subject-card reveal">
+                <span class="subject-icon">💼</span>
+                <div class="subject-name">Business Studies</div>
+                <div class="subject-tags">
+                    <span class="subject-tag">290+ Notes</span>
+                    <span class="subject-tag">85 Past Papers</span>
+                </div>
+                <div class="subject-desc">Economics, Accounting, Commerce, Marketing</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTENT LIBRARY -->
+<section class="library-section">
+    <div class="container">
+        <span class="section-tag">Content</span>
+        <h2 class="section-h2">Kila kitu unachohitaji</h2>
+        <p class="section-sub">Notes, Past Papers, na Daily Quizzes — zote katika platform moja rahisi.</p>
+        <div class="library-grid">
+            <div class="lib-card reveal">
+                <div class="lib-card-accent g"></div>
+                <span class="lib-icon">📝</span>
+                <h4>Notes</h4>
+                <p>Maelezo kamili ya syllabus yote, kila topic ina muundo rahisi kusoma.</p>
+                <div class="lib-list">
+                    <a href="/materials/notes/physics_form1.pdf">Form 1 Notes</a><br>
+                    <a href="/materials/notes/physics_form2.pdf">Form 2 Notes</a><br>
+                    <a href="/materials/notes/physics_form3.pdf">Form 3 Notes</a><br>
+                    <a href="/materials/notes/physics_form4.pdf">Form 4 Notes</a>
+                </div>
+                <a class="lib-btn" href="https://drive.google.com/drive/folders/129zQJQ4FyAihuZclQjxBj3BDG3xXUZeu" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-download"></i> Download Notes
+                </a>
+            </div>
+            <div class="lib-card reveal">
+                <div class="lib-card-accent b"></div>
+                <span class="lib-icon">📄</span>
+                <h4>Past Papers</h4>
+                <p>NECTA exam papers na solutions kamili — Form IV na VI.</p>
+                <ul class="lib-list">
+                    <li>2000–2026 papers</li>
+                    <li>Form IV & Form VI</li>
+                    <li>Full solutions included</li>
+                    <li>Marking schemes</li>
+                </ul>
+                <a class="lib-btn" href="https://drive.google.com/drive/folders/129zQJQ4FyAihuZclQjxBj3BDG3xXUZeu" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i> Pata Papers
+                </a>
+            </div>
+            <div class="lib-card reveal">
+                <div class="lib-card-accent o"></div>
+                <span class="lib-icon">🎯</span>
+                <h4>Daily Quizzes</h4>
+                <p>Quiz mpya kila siku kulingana na syllabus yako — ufuatilie maendeleo yako.</p>
+                <ul class="lib-list">
+                    <li>Questions 5–20 per quiz</li>
+                    <li>Instant feedback & score</li>
+                    <li>Leaderboard na marafiki</li>
+                    <li>NECTA prediction score</li>
+                </ul>
+                <button class="lib-btn" onclick="document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'})">
+                    <i class="fas fa-play"></i> Jaribu Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DAILY QUIZ -->
+<section id="quiz-section">
+    <div class="quiz-wrapper">
+        <div class="quiz-header reveal">
+            <span class="section-tag" style="color:var(--lime);">Interactive</span>
+            <h2 class="section-h2">Demo — Daily Quiz</h2>
+            <p style="color:rgba(255,255,255,0.55); font-size:0.95rem;">Jaribu uwezo wako sasa hivi. Commerce — Form IV</p>
+        </div>
+        <div class="quiz-card reveal" id="quiz-container">
+            <div class="quiz-progress">
+                <span class="quiz-progress-text">Swali <span id="q-counter">1</span>/5</span>
+                <div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:0%"></div></div>
+                <span class="quiz-progress-text" style="color:var(--lime);">🎯 NECTA Prep</span>
+            </div>
+            <div id="question"></div>
+            <div class="quiz-options" id="options"></div>
+        </div>
+        <div class="quiz-card reveal hidden" id="result"></div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+    <div class="container">
+        <span class="section-tag">Ushuhuda</span>
+        <h2 class="section-h2">Wanasema nini?</h2>
+        <p class="section-sub">Wanafunzi na walimu kutoka kote Tanzania wamebadilisha masomo yao.</p>
+        <div class="testimonials-grid">
+            <div class="testi-card reveal">
+                <div class="testi-stars">★★★★★</div>
+                <p class="testi-text">"Nilifeli Form 4 mara moja, nikaletwa MwanzoElimu na dada yangu. Nilipata Division I! Past papers na daily quizzes ndio zilinisaidia sana."</p>
+                <div class="testi-author">
+                    <div class="testi-avatar" style="background:#dcfce7;">👨‍🎓</div>
+                    <div>
+                        <div class="testi-name">Baraka Mwenda</div>
+                        <div class="testi-role">Form 4 Graduate, Dodoma</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card reveal">
+                <div class="testi-stars">★★★★★</div>
+                <p class="testi-text">"Kama mwalimu, sasa ninatengeneza tests na lesson plans kwa dakika 5 tu. Sijawahi kuwa na muda mwingi wa kufundisha kwa nguvu!"</p>
+                <div class="testi-author">
+                    <div class="testi-avatar" style="background:#dbeafe;">👩‍🏫</div>
+                    <div>
+                        <div class="testi-name">Salma Juma</div>
+                        <div class="testi-role">Teacher, Mwanza Secondary</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card reveal">
+                <div class="testi-stars">★★★★★</div>
+                <p class="testi-text">"Hata bila internet, ninaweza kusoma offline. Naishi vijijini Tabora — MwanzoElimu ni kitu pekee kilichobadilisha elimu yangu."</p>
+                <div class="testi-author">
+                    <div class="testi-avatar" style="background:#fef9c3;">👩‍🎓</div>
+                    <div>
+                        <div class="testi-name">Fatuma Hassan</div>
+                        <div class="testi-role">Form 6 Student, Tabora</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog-section">
+    <div class="container">
+        <span class="section-tag">Rasilimali</span>
+        <h2 class="section-h2">Latest Tips & Updates</h2>
+        <p class="section-sub">Habari za hivi karibuni, study tips, na mabadiliko ya NECTA syllabus.</p>
+        <div class="blog-grid">
+            <div class="blog-card reveal">
+                <div class="blog-thumb purple">📐</div>
+                <div class="blog-body">
+                    <span class="blog-tag purple">Study Tips</span>
+                    <h5 class="blog-title">10 Tricks to Pass Math Form 4</h5>
+                    <p class="blog-excerpt">Techniques zote tulizoona wanafunzi wakafanikiwa — from time management hadi mental calculation.</p>
+                    <a href="#" class="blog-read purple">Soma zaidi <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-card reveal">
+                <div class="blog-thumb blue">🏫</div>
+                <div class="blog-body">
+                    <span class="blog-tag blue">Teacher Insights</span>
+                    <h5 class="blog-title">Using MwanzoElimu in Classroom</h5>
+                    <p class="blog-excerpt">Jinsi walimu wanavyojumuisha platform katika masomo ya kawaida na kuongeza ushiriki wa wanafunzi.</p>
+                    <a href="#" class="blog-read blue">Soma zaidi <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-card reveal">
+                <div class="blog-thumb green">📋</div>
+                <div class="blog-body">
+                    <span class="blog-tag green">NECTA Updates</span>
+                    <h5 class="blog-title">2026 NECTA Changes</h5>
+                    <p class="blog-excerpt">Mabadiliko mapya ya syllabus na ratiba za mitihani. Hakikisha maandalizi yako yanafanana na mpya.</p>
+                    <a href="#" class="blog-read green">Soma zaidi <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing-section">
+    <div class="container">
+        <span class="section-tag">Bei</span>
+        <h2 class="section-h2">Chagua Plan Inayokufaa</h2>
+        <p class="section-sub">Bei bila siri. Acha wakati wowote. Guaranteed money back.</p>
+        <div class="pricing-grid">
+            <div class="price-card reveal">
+                <div class="price-name">🆓 Free</div>
+                <div class="price-amount">TZS 0</div>
+                <div class="price-period">milele bure</div>
+                <div class="price-divider"></div>
+                <ul class="price-features">
+                    <li class="price-feature"><i class="fas fa-check on"></i> 1 Quiz per siku</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> Limited notes</li>
+                    <li class="price-feature"><i class="fas fa-times off"></i> Past papers</li>
+                    <li class="price-feature"><i class="fas fa-times off"></i> Offline mode</li>
+                    <li class="price-feature"><i class="fas fa-times off"></i> NECTA predictions</li>
+                </ul>
+                <button class="btn-price btn-price-outline" onclick="openJoinModal()">Jiunge Bure</button>
+            </div>
+            <div class="price-card featured reveal">
+                <div class="price-badge">MOST POPULAR</div>
+                <div class="price-name">⭐ Premium Student</div>
+                <div class="price-amount">10,000</div>
+                <div class="price-period">TZS / mwezi • Mwezi 1 BURE</div>
+                <div class="price-divider"></div>
+                <ul class="price-features">
+                    <li class="price-feature"><i class="fas fa-check on"></i> Quizzes zisizo na kikomo</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> Notes + past papers zote</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> Offline mode</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> NECTA predictions</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> Video tutorials</li>
+                </ul>
+                <button class="btn-price btn-price-lime" onclick="openJoinModal()">Jiunge Sasa</button>
+            </div>
+            <div class="price-card reveal">
+                <div class="price-name">👨‍🏫 School / Teacher</div>
+                <div class="price-amount">50,000</div>
+                <div class="price-period">TZS / mwaka</div>
+                <div class="price-divider"></div>
+                <ul class="price-features">
+                    <li class="price-feature"><i class="fas fa-check on"></i> 5–15 teacher accounts</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> Schemes & lesson plans</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> Class management</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> Offline mode</li>
+                    <li class="price-feature"><i class="fas fa-check on"></i> Analytics ya wanafunzi</li>
+                </ul>
+                <button class="btn-price btn-price-outline" onclick="alert('Wasiliana nasi kwa maelezo zaidi!')">Wasiliana Nasi</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust-section">
+    <div class="trust-label">Shule zinazotuamini Tanzania nzima</div>
+    <div class="trust-numbers">
+        <div class="trust-item"><div class="trust-num">350+</div><div class="trust-sub">Shule</div></div>
+        <div class="trust-item"><div class="trust-num">45K+</div><div class="trust-sub">Wanafunzi Active</div></div>
+        <div class="trust-item"><div class="trust-num">1,200+</div><div class="trust-sub">Walimu</div></div>
+        <div class="trust-item"><div class="trust-num">98%</div><div class="trust-sub">Satisfaction</div></div>
+    </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="container" style="text-align:center; margin-bottom:3rem;">
+        <span class="section-tag">Maswali</span>
+        <h2 class="section-h2">Maswali Yanayoulizwa Mara Nyingi</h2>
+    </div>
+    <div class="faq-grid">
+        <div class="faq-item reveal" onclick="toggleFAQ(this)">
+            <div class="faq-q">
+                Je, MwanzoElimu inafanya kazi bila internet?
+                <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">Ndiyo! MwanzoElimu ina offline mode ya mwanafunzi. Unaweza kudownload notes, past papers, na quizzes unapokuwa na internet, kisha uzistudy wakati wote hata bila data.</div>
+        </div>
+        <div class="faq-item reveal" onclick="toggleFAQ(this)">
+            <div class="faq-q">
+                Ninaweza kulipa vipi?
+                <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">Tunakubali M-Pesa, Tigo Pesa, Airtel Money, na kadi za benki. Premium inaanza TZS 10,000 kwa mwezi. Mwezi wa kwanza ni bure bila haja ya kadi.</div>
+        </div>
+        <div class="faq-item reveal" onclick="toggleFAQ(this)">
+            <div class="faq-q">
+                Je, kuna past papers za kweli za NECTA?
+                <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">Ndiyo! Tuna papers za NECTA kuanzia mwaka 2000 hadi 2026, Form IV na Form VI. Kila paper ina marking scheme na solutions kamili zilizotayarishwa na walimu waliobobea.</div>
+        </div>
+        <div class="faq-item reveal" onclick="toggleFAQ(this)">
+            <div class="faq-q">
+                Platform inafanya kazi kwa simu gani?
+                <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">MwanzoElimu inafanya kazi kwenye simu yoyote — Android na iOS. Pia unaweza kutumia browser yoyote kwenye kompyuta. Haina haja ya RAM nyingi au simu ya kisasa.</div>
+        </div>
+        <div class="faq-item reveal" onclick="toggleFAQ(this)">
+            <div class="faq-q">
+                Kama mwalimu, ninaweza kutengeneza tests zangu?
+                <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">Kabisa! Walimu wanaweza kuunda tests za custom, kuchagua maswali kutoka kwenye question bank yetu, na kuweka deadline. Mfumo unagawa matokeo moja kwa moja.</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+    <div class="cta-content">
+        <span class="section-tag" style="justify-content:center; display:flex;">Anza Leo</span>
+        <h2 class="cta-h2">Anza Maandalizi<br>Yako <span>Sasa Hivi</span></h2>
+        <p class="cta-sub">Wanafunzi 45,000+ wanajifunza na MwanzoElimu kila siku. Jiunge nawe na ubadilishe NECTA yako.</p>
+        <div class="cta-btns">
+            <button class="btn-hero-main" onclick="openJoinModal()">🚀 Jiunge FREE</button>
+            <button class="btn-hero-sec" onclick="document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'})">🎯 Try Demo Quiz</button>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo" style="margin-bottom:1rem; display:inline-flex;">
+                    <div class="nav-logo-icon">📚</div>
+                    <span class="nav-logo-text" style="font-size:1.1rem;">Mwanzo<span>Elimu</span></span>
+                </a>
+                <p>Platform ya elimu bora Tanzania — NECTA Certified, TIE Approved, iliyoundwa kwa ajili ya elimu ya Tanzania.</p>
+                <div class="footer-socials">
+                    <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="footer-social"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Product</h5>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="openDoc('features');return false;">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#" onclick="openDoc('security');return false;">Security</a></li>
+                    <li><a href="#" onclick="openDoc('blog');return false;">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="openDoc('about');return false;">About</a></li>
+                    <li><a href="#" onclick="openDoc('contact');return false;">Contact</a></li>
+                    <li><a href="#" onclick="openDoc('partners');return false;">Partners</a></li>
+                    <li><a href="#" onclick="openDoc('careers');return false;">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Legal</h5>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="openDoc('privacy');return false;">Privacy Policy</a></li>
+                    <li><a href="#" onclick="openDoc('terms');return false;">Terms of Service</a></li>
+                    <li><a href="#" onclick="openDoc('cookies');return false;">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <span>© 2026 MwanzoElimu TZ • Dar es Salaam, Tanzania</span>
+            <span>NECTA Certified • TIE Approved • Built for Tanzania</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ─── QUIZ DATA ───
+const quizData = [
+    { question: "Which one of the following represents three main systems of taxation?", options: ["A. Progressive, proportional and regressive", "B. Direct, indirect and proportional", "C. Progressive, regressive and indirect", "D. Proportional, regressive and export"], correct: 0 },
+    { question: "What is the best definition of a sole trader?", options: ["A. Business employs one person", "B. Business is owned by one person", "C. Firm has a single customer", "D. Business sells only one product"], correct: 1 },
+    { question: "Which factor leads to change in quantity demanded?", options: ["A. Change in taste and fashion", "B. Change in price of the commodity", "C. Change in income", "D. Change in population"], correct: 1 },
+    { question: "Madam Masyanga buys large stock of maize despite price fall speculation. This shows she has:", options: ["A. Creative and imaginative thinking", "B. Willingness to assume risks", "C. Commitment and perseverance", "D. Innovative mind"], correct: 1 },
+    { question: "Which set of economic activities is an example of tertiary production?", options: ["A. Hair dressing, baking bread and banking", "B. Car manufacturing, hair dressing and banking", "C. Copper mining, oil refining and hotel keeping", "D. Teaching, banking and transporting"], correct: 3 }
+]
+
+let currentQuestion = 0, score = 0
+
+function loadQuestion() {
+    const q = quizData[currentQuestion]
+    document.getElementById('question').innerHTML =
+        `<span style="color:var(--lime)">Q${currentQuestion + 1}.</span> ${q.question}`
+    document.getElementById('q-counter').textContent = currentQuestion + 1
+    document.getElementById('progress-bar').style.width = (currentQuestion / quizData.length * 100) + '%'
+    const opts = document.getElementById('options')
+    opts.innerHTML = ''
+    q.options.forEach((opt, i) => {
+        const btn = document.createElement('button')
+        btn.className = 'quiz-opt-btn'
+        btn.textContent = opt
+        btn.onclick = () => checkAnswer(i, btn)
+        opts.appendChild(btn)
+    })
+}
+
+function checkAnswer(sel, btn) {
+    const correct = quizData[currentQuestion].correct
+    document.querySelectorAll('.quiz-opt-btn').forEach(b => b.onclick = null)
+    if (sel === correct) {
+        score++
+        btn.style.background = 'rgba(132,204,22,0.2)'
+        btn.style.borderColor = 'rgba(132,204,22,0.6)'
+        btn.style.color = 'var(--lime-bright)'
+    } else {
+        btn.style.background = 'rgba(239,68,68,0.15)'
+        btn.style.borderColor = 'rgba(239,68,68,0.4)'
+        btn.style.color = '#fca5a5'
+        document.querySelectorAll('.quiz-opt-btn')[correct].style.background = 'rgba(132,204,22,0.15)'
+        document.querySelectorAll('.quiz-opt-btn')[correct].style.borderColor = 'rgba(132,204,22,0.4)'
+        document.querySelectorAll('.quiz-opt-btn')[correct].style.color = 'var(--lime-bright)'
+    }
+    currentQuestion++
+    setTimeout(() => {
+        if (currentQuestion < quizData.length) loadQuestion()
+        else showResult()
+    }, 900)
+}
+
+function showResult() {
+    document.getElementById('quiz-container').classList.add('hidden')
+    const pct = Math.round(score / quizData.length * 100)
+    const msg = pct >= 80 ? "🎉 Excellente! Uko tayari kwa NECTA!" : pct >= 60 ? "👍 Vizuri! Endelea kufanya mazoezi" : "💪 Jaribu tena — utafanikiwa!"
+    const r = document.getElementById('result')
+    r.classList.remove('hidden')
+    r.innerHTML = `
+        <h3>Matokeo Yako</h3>
+        <div class="big-score">${score}/${quizData.length}</div>
+        <p style="font-size:1.1rem;margin:0.5rem 0;color:rgba(255,255,255,0.7);">${pct}%</p>
+        <p style="color:rgba(255,255,255,0.6);margin-top:0.5rem;">${msg}</p>
+        <button class="retry-btn" onclick="restartQuiz()">Jaribu Tena</button>
+    `
+}
+
+function restartQuiz() {
+    currentQuestion = 0; score = 0
+    document.getElementById('quiz-container').classList.remove('hidden')
+    document.getElementById('result').classList.add('hidden')
+    loadQuestion()
+}
+
+// ─── FAQ ───
+function toggleFAQ(el) {
+    const isOpen = el.classList.contains('open')
+    document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'))
+    if (!isOpen) el.classList.add('open')
+}
+
+// ─── REVEAL ON SCROLL ───
+const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+}, { threshold: 0.12 })
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el))
+
+// ─── SCROLL TO TOP ───
+const scrollBtn = document.getElementById('scrollTop')
+window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 500)
+})
+
+// ─── INIT ───
+window.onload = () => {
+    loadQuestion()
+}
+</script>
+
+<!-- ═══════════════════════════════════ MODAL YA JIUNGE ═══════════════════════════════════ -->
+<div id="joinModal" onclick="handleModalOverlayClick(event)">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 sm:p-8 border border-slate-100" onclick="event.stopPropagation()">
+
+        <!-- SEHEMU 1: Karibu -->
+        <div id="joinStartView" class="text-center">
+            <div class="bg-green-100 text-green-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+            </div>
+            <h2 class="text-2xl font-extrabold text-slate-800 mb-2">Jiunge na Kundi Letu</h2>
+            <p class="text-slate-600 mb-8 text-sm leading-relaxed">Pata notes, past papers, na jadiliana masomo na wanafunzi wenzako bure kabisa!</p>
+            <button onclick="joinOpenQuiz()" class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3.5 px-6 rounded-xl transition duration-200 shadow-lg shadow-green-200 flex justify-center items-center gap-2">
+                <span>Anza Hapa</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <button onclick="closeJoinModal()" class="mt-3 w-full text-slate-400 hover:text-slate-700 text-sm py-2 transition">Funga</button>
+        </div>
+
+        <!-- SEHEMU 2: Fomu -->
+        <div id="joinQuizBox" class="hidden">
+            <div class="flex items-center mb-6 pb-4 border-b border-slate-100">
+                <button onclick="joinGoBack()" class="text-slate-400 hover:text-slate-700 mr-3 p-1 rounded-full hover:bg-slate-100 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                </button>
+                <h3 class="text-lg font-bold text-slate-800">Taarifa Zako za Shule</h3>
+            </div>
+
+            <div id="joinErrorMessage" class="hidden mb-5 p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                <span id="joinErrorText">Tafadhali jaza sehemu zote kwa usahihi.</span>
+            </div>
+
+            <form onsubmit="event.preventDefault(); joinSubmitQuiz();" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="jq1">1. Uko Kidato/Darasa gani?</label>
+                    <select id="jq1" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 text-slate-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition appearance-none cursor-pointer">
+                        <option value="">-- Chagua Darasa --</option>
+                        <optgroup label="Sekondari (O-Level)">
+                            <option value="Form 1">Kidato cha Kwanza (Form 1)</option>
+                            <option value="Form 2">Kidato cha Pili (Form 2)</option>
+                            <option value="Form 3">Kidato cha Tatu (Form 3)</option>
+                            <option value="Form 4">Kidato cha Nne (Form 4)</option>
+                        </optgroup>
+                        <optgroup label="Sekondari (A-Level)">
+                            <option value="Form 5">Kidato cha Tano (Form 5)</option>
+                            <option value="Form 6">Kidato cha Sita (Form 6)</option>
+                        </optgroup>
+                        <optgroup label="Msingi">
+                            <option value="Darasa la 7">Darasa la Saba</option>
+                            <option value="Darasa la 6 au chini">Darasa la Sita au chini</option>
+                        </optgroup>
+                        <option value="Mwalimu/Mzazi">Mimi ni Mwalimu / Mzazi</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="jq2">2. Mchepuo / Somo kuu?</label>
+                    <select id="jq2" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 text-slate-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition appearance-none cursor-pointer">
+                        <option value="">-- Chagua Mchepuo/Somo --</option>
+                        <option value="Sayansi (Science)">Sayansi (Physics, Chemistry, Biology, Math)</option>
+                        <option value="Sanaa (Arts)">Sanaa (History, Geography, Kiswahili, English)</option>
+                        <option value="Biashara (Commerce)">Biashara (Book Keeping, Commerce)</option>
+                        <option value="PCB/PCM/PGM/CBA">A-Level Science (PCB, PCM, PGM, n.k)</option>
+                        <option value="HGL/HGK/HKL/ECA">A-Level Arts/Commerce (HGL, HGK, ECA, n.k)</option>
+                        <option value="Masomo Yote">Ninasoma masomo yote (Msingi/O-Level)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="jq3">3. Una umri wa miaka mingapi?</label>
+                    <input id="jq3" type="number" min="10" max="60" placeholder="Mfano: 16" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 text-slate-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="jq4">4. Kwenye Kundi unahitaji zaidi nini?</label>
+                    <select id="jq4" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 text-slate-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition appearance-none cursor-pointer">
+                        <option value="">-- Chagua unachohitaji --</option>
+                        <option value="Notes">Notes (Nukuhu za masomo)</option>
+                        <option value="Past Papers">Past Papers (Mitihani iliyopita)</option>
+                        <option value="Kujadili Maswali">Kujadili Maswali na Wenzangu</option>
+                        <option value="Vyote">Vyote hapo juu</option>
+                    </select>
+                </div>
+
+                <div class="pt-5 mt-2 border-t border-slate-100">
+                    <button type="submit" class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3.5 px-6 rounded-xl transition duration-200 shadow-lg flex justify-center items-center gap-2">
+                        <span>Peleka Majibu & Jiunge</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- SEHEMU 3: Loading / Success -->
+        <div id="joinSuccessBox" class="hidden text-center py-10">
+            <div class="join-loader mb-6"></div>
+            <h3 class="text-2xl font-bold text-slate-800 mb-2">Majibu Yamepokelewa!</h3>
+            <p class="text-slate-600 mb-6">Asante kwa kujaza taarifa zako kwa usahihi.</p>
+            <div class="inline-block bg-green-50 text-green-700 px-4 py-2 rounded-lg text-sm font-medium">
+                Tunaunganisha na WhatsApp...
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// ─── MODAL JIUNGE ───
+function openJoinModal() {
+    // Reset modal kwa hali ya awali
+    document.getElementById('joinStartView').classList.remove('hidden');
+    document.getElementById('joinQuizBox').classList.add('hidden');
+    document.getElementById('joinSuccessBox').classList.add('hidden');
+    document.getElementById('joinErrorMessage').classList.add('hidden');
+    document.getElementById('joinModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeJoinModal() {
+    document.getElementById('joinModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+function handleModalOverlayClick(e) {
+    if (e.target === document.getElementById('joinModal')) closeJoinModal();
+}
+function joinOpenQuiz() {
+    document.getElementById('joinStartView').classList.add('hidden');
+    document.getElementById('joinQuizBox').classList.remove('hidden');
+}
+function joinGoBack() {
+    document.getElementById('joinQuizBox').classList.add('hidden');
+    document.getElementById('joinStartView').classList.remove('hidden');
+    document.getElementById('joinErrorMessage').classList.add('hidden');
+}
+function joinShowError(msg) {
+    document.getElementById('joinErrorText').innerText = msg;
+    document.getElementById('joinErrorMessage').classList.remove('hidden');
+}
+function joinSubmitQuiz() {
+    let q1 = document.getElementById('jq1').value;
+    let q2 = document.getElementById('jq2').value;
+    let q3 = document.getElementById('jq3').value.trim();
+    let q4 = document.getElementById('jq4').value;
+
+    if (q1 === '') { joinShowError('Tafadhali chagua Darasa/Kidato chako.'); document.getElementById('jq1').focus(); return; }
+    if (q2 === '') { joinShowError('Tafadhali chagua Mchepuo au Somo lako kuu.'); document.getElementById('jq2').focus(); return; }
+    if (q3 === '') { joinShowError('Tafadhali andika umri wako.'); document.getElementById('jq3').focus(); return; }
+    if (isNaN(q3) || parseInt(q3) < 10 || parseInt(q3) > 60) { joinShowError('Tafadhali weka umri sahihi (kati ya miaka 10 na 60).'); document.getElementById('jq3').focus(); return; }
+    if (q4 === '') { joinShowError('Tafadhali chagua kile unachohitaji zaidi kwenye kundi.'); document.getElementById('jq4').focus(); return; }
+
+    document.getElementById('joinErrorMessage').classList.add('hidden');
+    document.getElementById('joinQuizBox').classList.add('hidden');
+    document.getElementById('joinSuccessBox').classList.remove('hidden');
+
+    // ⬇️ WEKA LINK YAKO YA WHATSAPP HAPA
+    let groupLink = "https://whatsapp.com/channel/0029Vb7zr5U0AgWJSliYQe2Q";
+
+    setTimeout(function() {
+        window.location.href = groupLink;
+    }, 2500);
+}
+</script>
+
+<!-- ════════════════ LOGIN MODAL — PHONE + OTP ════════════════ -->
+<div id="loginModal" onclick="if(event.target===this)closeLoginModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999999;align-items:center;justify-content:center;padding:1rem;">
+  <div style="width:100%;max-width:26rem;font-family:'Plus Jakarta Sans',sans-serif;" onclick="event.stopPropagation()">
+
+    <!-- Logo area -->
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <div style="display:inline-flex;align-items:center;justify-content:center;width:3.5rem;height:3.5rem;background:linear-gradient(135deg,#16a34a,#84cc16);border-radius:1rem;box-shadow:0 8px 24px rgba(22,163,74,0.35);margin-bottom:0.75rem;">
+        <span style="font-size:1.6rem;">📚</span>
+      </div>
+      <h1 style="font-size:1.35rem;font-weight:800;color:#fff;margin:0;">MwanzoElimu</h1>
+      <p style="color:rgba(255,255,255,0.55);font-size:0.8rem;margin-top:0.2rem;">Ingia kwenye akaunti yako</p>
+    </div>
+
+    <div id="loginBox" style="background:#fff;border-radius:1.5rem;box-shadow:0 24px 60px rgba(0,0,0,0.2);padding:2rem;border:1px solid #e2e8f0;">
+
+      <!-- STEP 1: PHONE -->
+      <div id="lstep1">
+        <h2 style="font-size:1rem;font-weight:700;color:#1e293b;margin:0 0 1.25rem;">📱 Weka Namba ya Simu</h2>
+        <div style="margin-bottom:1rem;">
+          <label style="display:block;font-size:0.7rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;">Namba ya Simu</label>
+          <div style="display:flex;gap:8px;">
+            <div style="padding:0.8rem 0.9rem;background:#f1f5f9;border:1.5px solid #e2e8f0;border-radius:0.75rem;font-size:0.85rem;font-weight:600;color:#374151;white-space:nowrap;">🇹🇿 +255</div>
+            <input type="tel" id="lPhoneInput" maxlength="9" placeholder="743 548 225"
+              style="flex:1;padding:0.8rem 1rem;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:0.75rem;outline:none;font-size:0.95rem;font-weight:600;letter-spacing:0.05em;transition:border 0.2s;width:100%;"
+              onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e2e8f0'"
+              oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:1.25rem;">
+          <input type="checkbox" id="lRememberMe" style="width:1rem;height:1rem;accent-color:#16a34a;cursor:pointer;">
+          <label for="lRememberMe" style="font-size:0.82rem;color:#64748b;cursor:pointer;">Nikumbuke kwenye kifaa hiki</label>
+        </div>
+        <button onclick="lHandleRequestOTP()"
+          style="width:100%;background:#16a34a;color:#fff;font-weight:700;padding:0.95rem;border-radius:0.9rem;border:none;cursor:pointer;font-size:0.95rem;box-shadow:0 8px 20px rgba(22,163,74,0.3);transition:background 0.2s;"
+          onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
+          Tuma Kodi ya OTP
+        </button>
+        <div style="margin-top:1rem;text-align:center;">
+          <a href="https://wa.me/255743548225" target="_blank"
+            style="display:inline-flex;align-items:center;gap:6px;color:#16a34a;font-size:0.82rem;font-weight:700;text-decoration:none;">
+            <span style="background:#dcfce7;padding:4px 10px;border-radius:99px;">💬 Omba msaada WhatsApp</span>
+          </a>
+        </div>
+        <button onclick="closeLoginModal()" style="width:100%;margin-top:0.75rem;background:none;border:none;color:#94a3b8;font-size:0.82rem;cursor:pointer;padding:0.4rem;">Funga</button>
+      </div>
+
+      <!-- STEP 2: OTP -->
+      <div id="lstep2" style="display:none;text-align:center;">
+        <button onclick="lGoToStep(1)" style="background:none;border:none;color:#94a3b8;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:0.82rem;font-weight:600;margin-bottom:1rem;padding:0;"
+          onmouseover="this.style.color='#16a34a'" onmouseout="this.style.color='#94a3b8'">
+          ← Badili namba
+        </button>
+        <div style="margin-bottom:1.25rem;text-align:left;">
+          <h2 style="font-size:1rem;font-weight:700;color:#1e293b;margin:0 0 0.3rem;">Weka Kodi ya OTP</h2>
+          <p style="font-size:0.78rem;color:#94a3b8;line-height:1.6;">
+            Tumetuma kodi kwenda: <strong id="lMaskedPhone" style="color:#16a34a;"></strong>
+          </p>
+        </div>
+        <div style="display:flex;justify-content:center;gap:10px;margin-bottom:1.5rem;">
+          <input type="text" inputmode="numeric" maxlength="1" class="l-otp"
+            style="width:3.2rem;height:3.8rem;text-align:center;font-size:1.5rem;font-weight:700;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:0.75rem;outline:none;transition:all 0.2s;"
+            onfocus="this.style.borderColor='#16a34a';this.style.boxShadow='0 0 0 3px rgba(22,163,74,0.15)'" onblur="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+          <input type="text" inputmode="numeric" maxlength="1" class="l-otp"
+            style="width:3.2rem;height:3.8rem;text-align:center;font-size:1.5rem;font-weight:700;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:0.75rem;outline:none;transition:all 0.2s;"
+            onfocus="this.style.borderColor='#16a34a';this.style.boxShadow='0 0 0 3px rgba(22,163,74,0.15)'" onblur="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+          <input type="text" inputmode="numeric" maxlength="1" class="l-otp"
+            style="width:3.2rem;height:3.8rem;text-align:center;font-size:1.5rem;font-weight:700;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:0.75rem;outline:none;transition:all 0.2s;"
+            onfocus="this.style.borderColor='#16a34a';this.style.boxShadow='0 0 0 3px rgba(22,163,74,0.15)'" onblur="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+          <input type="text" inputmode="numeric" maxlength="1" class="l-otp"
+            style="width:3.2rem;height:3.8rem;text-align:center;font-size:1.5rem;font-weight:700;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:0.75rem;outline:none;transition:all 0.2s;"
+            onfocus="this.style.borderColor='#16a34a';this.style.boxShadow='0 0 0 3px rgba(22,163,74,0.15)'" onblur="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+        </div>
+        <button onclick="lHandleVerify()"
+          style="width:100%;background:#16a34a;color:#fff;font-weight:700;padding:0.95rem;border-radius:0.9rem;border:none;cursor:pointer;font-size:0.95rem;box-shadow:0 8px 20px rgba(22,163,74,0.3);margin-bottom:0.75rem;"
+          onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
+          Hakiki na Ingia
+        </button>
+        <p style="font-size:0.75rem;color:#94a3b8;">
+          Hujapokea? <a href="#" style="color:#16a34a;font-weight:700;" onclick="event.preventDefault();lHandleRequestOTP()">Tuma tena</a>
+        </p>
+      </div>
+
+      <!-- STEP 3: SUCCESS -->
+      <div id="lstep3" style="display:none;text-align:center;padding:1rem 0;">
+        <div style="width:5rem;height:5rem;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+          <span style="font-size:2.5rem;">✅</span>
+        </div>
+        <h2 style="font-size:1.4rem;font-weight:800;color:#1e293b;margin:0 0 0.5rem;">Hongera!</h2>
+        <p style="color:#64748b;font-size:0.85rem;margin:0 0 1.5rem;">Umeingia kwenye MwanzoElimu.</p>
+        <a href="https://wa.me/255743548225" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#25D366;color:#fff;font-weight:700;padding:0.95rem;border-radius:0.9rem;text-decoration:none;font-size:0.9rem;box-shadow:0 8px 20px rgba(37,211,102,0.3);margin-bottom:0.75rem;">
+          💬 Jiunge Kikundi WhatsApp
+        </a>
+        <button onclick="closeLoginModal()" style="background:none;border:none;font-size:0.82rem;font-weight:700;color:#94a3b8;cursor:pointer;text-decoration:underline;">Funga</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════ DARK MODE ════════════════
+let isDark = localStorage.getItem('mw_dark') === '1';
+function applyDark() {
+    document.body.classList.toggle('dark', isDark);
+    const b = document.getElementById('darkBtn');
+    const mb = document.getElementById('mDarkBtn');
+    if (b)  b.textContent  = isDark ? '☀️' : '🌙';
+    if (mb) mb.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+}
+function toggleDark() {
+    isDark = !isDark;
+    localStorage.setItem('mw_dark', isDark ? '1' : '0');
+    applyDark();
+}
+
+// ════════════════ LANGUAGE ════════════════
+let lang = localStorage.getItem('mw_lang') || 'sw';
+function applyLang() {
+    document.querySelectorAll('[data-sw]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang) || el.textContent;
+    });
+    const b  = document.getElementById('langBtn');
+    const mb = document.getElementById('mLangBtn');
+    if (b)  b.textContent  = lang === 'sw' ? 'EN' : 'SW';
+    if (mb) mb.textContent = lang === 'sw' ? 'EN → SW' : 'SW → EN';
+    document.documentElement.lang = lang;
+}
+function toggleLang() {
+    lang = lang === 'sw' ? 'en' : 'sw';
+    localStorage.setItem('mw_lang', lang);
+    applyLang();
+    syncLoginBtn();
+}
+
+// ════════════════ MOBILE DRAWER ════════════════
+function toggleDrawer() {
+    const d = document.getElementById('mobileDrawer');
+    const h = document.getElementById('hamburgerBtn');
+    d.classList.toggle('open');
+    h.classList.toggle('open');
+    document.body.style.overflow = d.classList.contains('open') ? 'hidden' : '';
+}
+function closeDrawer() {
+    document.getElementById('mobileDrawer').classList.remove('open');
+    document.getElementById('hamburgerBtn').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// ════════════════ LOGIN SYSTEM ════════════════
+function openLoginModal() {
+    lGoToStep(1);
+    document.getElementById('loginModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    const saved = localStorage.getItem('mw_phone');
+    if (saved) {
+        document.getElementById('lPhoneInput').value = saved;
+        document.getElementById('lRememberMe').checked = true;
+    }
+    // OTP auto-advance
+    const otps = document.querySelectorAll('.l-otp');
+    otps.forEach((inp, i) => {
+        inp.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/[^0-9]/g,'');
+            if (e.target.value.length === 1 && i < otps.length - 1) otps[i+1].focus();
+        });
+        inp.addEventListener('keydown', e => {
+            if (e.key === 'Backspace' && !e.target.value && i > 0) otps[i-1].focus();
+        });
+    });
+}
+function closeLoginModal() {
+    document.getElementById('loginModal').style.display = 'none';
+    document.body.style.overflow = '';
+}
+function lGoToStep(n) {
+    ['lstep1','lstep2','lstep3'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+    });
+    document.getElementById('lstep' + n).style.display = n === 2 ? 'block' : 'block';
+    if (n === 1) document.getElementById('lstep1').style.display = 'block';
+    if (n === 2) { document.getElementById('lstep1').style.display = 'none'; document.getElementById('lstep2').style.display = 'block'; }
+    if (n === 3) { document.getElementById('lstep1').style.display = 'none'; document.getElementById('lstep2').style.display = 'none'; document.getElementById('lstep3').style.display = 'block'; }
+}
+function maskPhone(p) {
+    return '+255 ' + p.substring(0,3) + ' *** ' + p.slice(-3);
+}
+function lHandleRequestOTP() {
+    const phone = document.getElementById('lPhoneInput').value.trim();
+    if (phone.length < 9) {
+        alert('Tafadhali weka namba sahihi ya simu (tarakimu 9).');
+        document.getElementById('lPhoneInput').focus();
+        return;
+    }
+    if (document.getElementById('lRememberMe').checked) {
+        localStorage.setItem('mw_phone', phone);
+    } else {
+        localStorage.removeItem('mw_phone');
+    }
+    document.getElementById('lMaskedPhone').textContent = maskPhone(phone);
+    // Hapa OTP ya kweli ingetumwa kwa SMS – kwa sasa ni demo
+    lGoToStep(2);
+    setTimeout(() => { const o = document.querySelectorAll('.l-otp'); if(o[0]) o[0].focus(); }, 120);
+}
+function lHandleVerify() {
+    const otps = document.querySelectorAll('.l-otp');
+    const code = [...otps].map(i => i.value).join('');
+    if (code.length < 4) {
+        alert('Tafadhali jaza tarakimu zote 4 za OTP.');
+        return;
+    }
+    // Hifadhi login state
+    const phone = document.getElementById('lPhoneInput').value.trim();
+    localStorage.setItem('mw_logged_in', '1');
+    localStorage.setItem('mw_user', phone);
+    lGoToStep(3);
+    syncLoginBtn();
+}
+function syncLoginBtn() {
+    const loggedIn = localStorage.getItem('mw_logged_in');
+    const phone    = localStorage.getItem('mw_user') || '';
+    const lsw = lang === 'sw'; 
+    const b  = document.getElementById('loginNavBtn');
+    const mb = document.getElementById('mLoginBtn');
+    if (loggedIn) {
+        const label = '👤 ' + phone.substring(0,4) + '***';
+        if (b)  { b.textContent = label;  b.onclick = logoutUser; }
+        if (mb) { mb.textContent = label; mb.onclick = logoutUser; }
+    } else {
+        const label = lsw ? 'Ingia' : 'Login';
+        if (b)  { b.textContent = label;  b.setAttribute('data-sw','Ingia'); b.setAttribute('data-en','Login'); b.onclick = openLoginModal; }
+        if (mb) { mb.textContent = label; mb.setAttribute('data-sw','Ingia'); mb.setAttribute('data-en','Login'); mb.onclick = openLoginModal; }
+    }
+}
+function logoutUser() {
+    localStorage.removeItem('mw_logged_in');
+    localStorage.removeItem('mw_user');
+    syncLoginBtn();
+    alert(lang === 'sw' ? 'Umetoka kwenye akaunti.' : 'You have been logged out.');
+}
+
+// ════════════════ SCROLL & REVEAL ════════════════
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollTop');
+    if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+    const nav = document.getElementById('navbar');
+    if (nav) nav.style.background = window.scrollY > 60
+        ? 'rgba(5,20,12,0.97)' : 'rgba(10,61,46,0.85)';
+});
+const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// ════════════════ FAQ ════════════════
+function toggleFAQ(item) {
+    item.classList.toggle('open');
+}
+
+
+// ════════════════ DOCUMENT SYSTEM ════════════════
+const DOCS = {
+
+  features: {
+    icon:'✨', title:'Vipengele vya MwanzoElimu', subtitle:'Platform ya elimu bora Tanzania',
+    body:`
+      <p class="doc-last-updated">Imesasishwa: Januari 2026</p>
+      <div class="doc-highlight"><p>MwanzoElimu ni jukwaa la kwanza Tanzania lenye vipengele vyote vya kujifunza NECTA online — bila malipo ya ziada.</p></div>
+
+      <h2>📚 Maktaba ya Notes</h2>
+      <p>Notes zote zinapatikana kwa masomo ya Form 1–4 (O-Level) na Form 5–6 (A-Level), zimeandikwa kulingana na mtaala wa Tanzania (NECTA/TIE).</p>
+      <ul>
+        <li>Masomo yote 14 ya O-Level yanayotahiniwa na NECTA</li>
+        <li>PDF zinazoweza kupakuliwa na kusomwa offline</li>
+        <li>Notes zinasasishwa kila mwaka kulingana na syllabus mpya</li>
+        <li>Lugha: Kiswahili na Kiingereza</li>
+      </ul>
+
+      <h2>📝 Past Papers na Marking Schemes</h2>
+      <p>Mkusanyiko wa karatasi za mitihani ya NECTA tangu mwaka 2000 hadi sasa, pamoja na majibu kamili.</p>
+      <ul>
+        <li>CSEE (Form 4) — miaka 25+ ya maswali</li>
+        <li>ACSEE (Form 6) — miaka 20+ ya maswali</li>
+        <li>Marking Schemes za kila karatasi</li>
+        <li>Model Answers zilizoandikwa na walimu bora</li>
+      </ul>
+
+      <h2>🎯 Daily Quiz</h2>
+      <p>Maswali mapya ya NECTA kila siku — yanaonyesha uwezo wako na kukusaidia kujua udhaifu wako.</p>
+      <ul>
+        <li>Quiz za kila somo — Biology, Chemistry, Physics, Math, na zaidi</li>
+        <li>Timer ya dakika 30 kama mtihani wa kweli</li>
+        <li>Maelezo ya kina ya kila jibu</li>
+        <li>Leaderboard ya wanafunzi bora Tanzania</li>
+      </ul>
+
+      <h2>📱 Offline Mode</h2>
+      <p>Soma hata bila internet — notes na maswali yanaweza kupakuliwa kwenye simu yako.</p>
+
+      <h2>👩‍🏫 Kwa Walimu</h2>
+      <p>Walimu wanaweza kuunda madarasa ya kidijitali, kutoa kazi za nyumbani, na kufuatilia maendeleo ya wanafunzi.</p>
+    `
+  },
+
+  security: {
+    icon:'🔒', title:'Usalama wa Data', subtitle:'Jinsi tunavyolinda taarifa zako',
+    body:`
+      <p class="doc-last-updated">Imesasishwa: Januari 2026</p>
+      <div class="doc-highlight"><p>MwanzoElimu inazingatia faragha na usalama wa data za watumiaji wetu — hasa wanafunzi wadogo.</p></div>
+
+      <h2>🛡️ Jinsi Tunavyolinda Data Yako</h2>
+      <p>Tunatumia teknolojia za kisasa za kriptografia (encryption) ili kuhakikisha data yako haiwezi kusomwa na mtu yeyote asiyeruhusiwa.</p>
+      <ul>
+        <li>SSL/TLS encryption kwa uhamisho wote wa data</li>
+        <li>AES-256 encryption kwa data zilizohifadhiwa</li>
+        <li>Backup ya data kila siku</li>
+        <li>Seva zetu zipo Tanzania na Afrika Mashariki</li>
+      </ul>
+
+      <h2>🔑 Mfumo wa Kuingia (Authentication)</h2>
+      <p>Tunatumia OTP (One-Time Password) kupitia simu — hakuna nenosiri la kukumbuka, hakuna hatari ya kuvujisha.</p>
+      <ul>
+        <li>OTP inafutwa baada ya dakika 5</li>
+        <li>Kila kuingia kwenye akaunti kunatumia OTP mpya</li>
+        <li>Shughuli zote zinakaguliwa na kumbukumbu ya kumbukumbu (audit log)</li>
+      </ul>
+
+      <h2>👶 Ulinzi wa Watoto</h2>
+      <p>Tunafuata sheria zote za kimataifa za ulinzi wa data za watoto (COPPA, GDPR for minors).</p>
+      <ul>
+        <li>Watoto chini ya miaka 13 wanahitaji idhini ya mzazi</li>
+        <li>Hakuna matangazo kwenye akaunti za wanafunzi</li>
+        <li>Maudhui yanakaguliwa na timu yetu</li>
+      </ul>
+
+      <h2>📞 Ripoti Tatizo</h2>
+      <p>Ukigundua tatizo lolote la usalama, tafadhali wasiliana nasi mara moja:</p>
+      <div class="doc-highlight"><p>📧 security@mwanzoelimu.co.tz &nbsp;|&nbsp; 💬 <a href="https://wa.me/255743548225" target="_blank" style="color:#16a34a;font-weight:700;">WhatsApp: 0743 548 225</a></p></div>
+    `
+  },
+
+  blog: {
+    icon:'📰', title:'Blog ya MwanzoElimu', subtitle:'Makala, habari na vidokezo vya elimu',
+    body:`
+      <p class="doc-last-updated">Makala za hivi karibuni — Januari 2026</p>
+
+      <h2>🔥 Makala Maarufu</h2>
+
+      <h3>1. Jinsi ya Kufaulu NECTA 2026 — Mkakati wa Wanafunzi Bora</h3>
+      <p>Wanafunzi waliopata Division One wanashiriki siri zao za kufaulu. Kujifunza jinsi ya kupanga muda, kufanya past papers, na kudhibiti msongo wa mawazo.</p>
+
+      <h3>2. Masomo 5 Magumu Zaidi NECTA — na Jinsi ya Kuyashinda</h3>
+      <p>Physics, Chemistry, Mathematics, English na Additional Mathematics — tuna mikakati ya kila moja. Notes maalum na maswali ya ziada yanapatikana bure.</p>
+
+      <h3>3. Tofauti kati ya O-Level na A-Level Tanzania</h3>
+      <p>Mwanzo wa kidato cha 5 unaweza kuwa mgumu. Makala hii inaeleza tofauti kubwa na jinsi ya kujiandaa vizuri kutoka Form 4 hadi Form 5.</p>
+
+      <h2>📌 Kategoria za Blog</h2>
+      <ul>
+        <li><strong>Vidokezo vya Masomo</strong> — Mikakati ya kujifunza kwa ufanisi</li>
+        <li><strong>Habari za NECTA</strong> — Matokeo, mabadiliko ya syllabus, taarifa rasmi</li>
+        <li><strong>Walimu Wanaongea</strong> — Uzoefu wa walimu bora Tanzania</li>
+        <li><strong>Teknolojia na Elimu</strong> — AI, dijitali na mustakabali wa elimu</li>
+        <li><strong>Hadithi za Mafanikio</strong> — Wanafunzi waliofaulu na safari zao</li>
+      </ul>
+
+      <div class="doc-highlight">
+        <p>📬 Unataka kuandika makala? Wasiliana nasi: <a href="https://wa.me/255743548225" target="_blank" style="color:#16a34a;font-weight:700;">0743 548 225</a></p>
+      </div>
+    `
+  },
+
+  about: {
+    icon:'🏫', title:'Kuhusu MwanzoElimu', subtitle:'Tunasimama wapi na kwa nini',
+    body:`
+      <p class="doc-last-updated">Imesasishwa: Januari 2026</p>
+      <div class="doc-highlight"><p>MwanzoElimu ilianzishwa mwaka 2022 Dar es Salaam na kikundi cha walimu na wataalam wa teknolojia waliochoka kuona wanafunzi wa Tanzania wakikosa rasilimali bora za kujifunza.</p></div>
+
+      <h2>🎯 Dhamira Yetu</h2>
+      <p>Kuhakikisha kila mwanafunzi Tanzania — iwe Dar es Salaam, Dodoma, Mtwara au Kigoma — anapata rasilimali bora za elimu bila kikwazo cha pesa au umbali.</p>
+
+      <h2>👥 Timu Yetu</h2>
+      <ul>
+        <li><strong>Wataalamu wa elimu:</strong> Walimu wenye uzoefu wa miaka 10+ wa kufundisha NECTA</li>
+        <li><strong>Wataalam wa teknolojia:</strong> Wahandisi wa programu kutoka Tanzania na Afrika Mashariki</li>
+        <li><strong>Washauri:</strong> Wazazi, wanafunzi na washirika wa TIE/NECTA</li>
+      </ul>
+
+      <h2>📊 Takwimu Zetu</h2>
+      <ul>
+        <li>Wanafunzi 45,000+ wanaotumia platform yetu kila mwezi</li>
+        <li>Walimu 3,200+ kutoka shule 800+ Tanzania</li>
+        <li>Past Papers 12,500+ na Notes kamili za masomo yote</li>
+        <li>Success rate ya 94% kwa wanafunzi wanaotumia MwanzoElimu mara kwa mara</li>
+      </ul>
+
+      <h2>🏆 Tunatambuliwa</h2>
+      <ul>
+        <li>NECTA Certified Platform — 2023</li>
+        <li>TIE Approved Educational Resource — 2023</li>
+        <li>Best EdTech Startup Tanzania — TechFest 2024</li>
+        <li>UNESCO Innovation in Education Award — 2025</li>
+      </ul>
+    `
+  },
+
+  contact: {
+    icon:'📞', title:'Wasiliana Nasi', subtitle:'Tuko hapa kukusaidia',
+    body:`
+      <p class="doc-last-updated">Masaa ya kazi: Jumatatu–Ijumaa 8:00–18:00, Jumamosi 9:00–14:00</p>
+
+      <div class="doc-contact-grid">
+        <div class="doc-contact-card">
+          <div class="icon">💬</div>
+          <h4>WhatsApp</h4>
+          <a href="https://wa.me/255743548225" target="_blank">+255 743 548 225</a>
+          <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Jibu ndani ya dakika 30</p>
+        </div>
+        <div class="doc-contact-card">
+          <div class="icon">📧</div>
+          <h4>Barua Pepe</h4>
+          <a href="mailto:info@mwanzoelimu.co.tz">info@mwanzoelimu.co.tz</a>
+          <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Jibu ndani ya saa 24</p>
+        </div>
+        <div class="doc-contact-card">
+          <div class="icon">📍</div>
+          <h4>Ofisi Yetu</h4>
+          <a href="#">Dar es Salaam, Tanzania</a>
+          <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Kinondoni, Mikocheni B</p>
+        </div>
+        <div class="doc-contact-card">
+          <div class="icon">📱</div>
+          <h4>Simu</h4>
+          <a href="tel:+255743548225">+255 743 548 225</a>
+          <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Jumatatu–Ijumaa</p>
+        </div>
+      </div>
+
+      <h2>🆘 Msaada wa Haraka</h2>
+      <p>Kwa matatizo ya akaunti, malipo, au ufikiaji wa maudhui, bonyeza kitufe hapa chini kupata msaada wa moja kwa moja kupitia WhatsApp:</p>
+      <a href="https://wa.me/255743548225?text=Habari%20MwanzoElimu%2C%20ninahitaji%20msaada%20na..." target="_blank"
+        style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:700;padding:12px 24px;border-radius:10px;text-decoration:none;font-size:0.9rem;margin-top:0.5rem;">
+        💬 Anza Mazungumzo WhatsApp
+      </a>
+
+      <h2>🏫 Kwa Shule na Taasisi</h2>
+      <p>Unataka MwanzoElimu katika shule yako? Tuna mipango maalum ya shule nzima. Wasiliana nasi kwa barua pepe: <a href="mailto:schools@mwanzoelimu.co.tz" style="color:#16a34a;font-weight:600;">schools@mwanzoelimu.co.tz</a></p>
+    `
+  },
+
+  partners: {
+    icon:'🤝', title:'Washirika Wetu', subtitle:'Tunashirikiana na taasisi bora',
+    body:`
+      <p class="doc-last-updated">Imesasishwa: Januari 2026</p>
+      <div class="doc-highlight"><p>MwanzoElimu inashirikiana na taasisi za elimu, kampuni za teknolojia na mashirika ya kimataifa ili kuboresha elimu Tanzania.</p></div>
+
+      <h2>🏛️ Washirika wa Serikali</h2>
+      <ul>
+        <li><strong>NECTA</strong> — National Examinations Council of Tanzania (ushirikiano wa maudhui)</li>
+        <li><strong>TIE</strong> — Tanzania Institute of Education (idhini ya syllabus)</li>
+        <li><strong>MoEST</strong> — Wizara ya Elimu, Sayansi na Teknolojia</li>
+      </ul>
+
+      <h2>🌍 Washirika wa Kimataifa</h2>
+      <ul>
+        <li><strong>UNESCO</strong> — Mradi wa elimu dijitali Afrika Mashariki</li>
+        <li><strong>UNICEF Tanzania</strong> — Programu ya elimu kwa makundi yaliyoathirika</li>
+        <li><strong>Khan Academy</strong> — Ushirikiano wa maudhui ya hisabati</li>
+        <li><strong>Google for Education</strong> — Miundombinu ya teknolojia</li>
+      </ul>
+
+      <h2>🏢 Washirika wa Biashara</h2>
+      <ul>
+        <li><strong>Vodacom Tanzania</strong> — Data bundles za elimu bila malipo</li>
+        <li><strong>Airtel Tanzania</strong> — Zero-rated access kwa wanafunzi</li>
+        <li><strong>CRDB Bank</strong> — Mikopo ya elimu na malipo ya ada</li>
+        <li><strong>Azania Bank</strong> — Mfumo wa malipo wa platform</li>
+      </ul>
+
+      <h2>📩 Kuwa Mshirika</h2>
+      <p>Kampuni au taasisi yako inataka kushirikiana? Wasiliana nasi:</p>
+      <div class="doc-highlight"><p>📧 <a href="mailto:partners@mwanzoelimu.co.tz" style="color:#16a34a;font-weight:700;">partners@mwanzoelimu.co.tz</a> &nbsp;|&nbsp; 💬 <a href="https://wa.me/255743548225" target="_blank" style="color:#16a34a;font-weight:700;">+255 743 548 225</a></p></div>
+    `
+  },
+
+  careers: {
+    icon:'💼', title:'Kazi MwanzoElimu', subtitle:'Jiunge na timu inayobadilisha elimu Tanzania',
+    body:`
+      <p class="doc-last-updated">Nafasi zinazopatikana — Januari 2026</p>
+      <div class="doc-highlight"><p>Tunatafuta watu wenye shauku ya elimu na teknolojia. Kazi nyingi zinaweza kufanywa mbali (remote) Tanzania nzima.</p></div>
+
+      <h2>🔥 Nafasi Zilizopo Sasa</h2>
+
+      <div class="doc-career-card">
+        <div>
+          <h4>Content Writer — Kiswahili/Sayansi</h4>
+          <p>📍 Remote Tanzania &nbsp;|&nbsp; ⏱ Part-time &nbsp;|&nbsp; 💰 TZS 300,000–600,000/mwezi</p>
+        </div>
+        <button class="doc-career-btn" onclick="window.open('https://wa.me/255743548225?text=Ninataka%20kuomba%20kazi%20ya%20Content%20Writer','_blank')">Omba</button>
+      </div>
+
+      <div class="doc-career-card">
+        <div>
+          <h4>Frontend Developer (React/HTML)</h4>
+          <p>📍 Remote / Dar es Salaam &nbsp;|&nbsp; ⏱ Full-time &nbsp;|&nbsp; 💰 Inalingana na uzoefu</p>
+        </div>
+        <button class="doc-career-btn" onclick="window.open('https://wa.me/255743548225?text=Ninataka%20kuomba%20kazi%20ya%20Frontend%20Developer','_blank')">Omba</button>
+      </div>
+
+      <div class="doc-career-card">
+        <div>
+          <h4>Mwalimu wa Masomo ya Sayansi (Online)</h4>
+          <p>📍 Remote Tanzania &nbsp;|&nbsp; ⏱ Part-time &nbsp;|&nbsp; 💰 TZS 200,000–500,000/mwezi</p>
+        </div>
+        <button class="doc-career-btn" onclick="window.open('https://wa.me/255743548225?text=Ninataka%20kuomba%20kazi%20ya%20Mwalimu','_blank')">Omba</button>
+      </div>
+
+      <div class="doc-career-card">
+        <div>
+          <h4>Customer Support Specialist</h4>
+          <p>📍 Dar es Salaam &nbsp;|&nbsp; ⏱ Full-time &nbsp;|&nbsp; 💰 TZS 500,000–800,000/mwezi</p>
+        </div>
+        <button class="doc-career-btn" onclick="window.open('https://wa.me/255743548225?text=Ninataka%20kuomba%20kazi%20ya%20Customer%20Support','_blank')">Omba</button>
+      </div>
+
+      <h2>📋 Jinsi ya Kuomba</h2>
+      <p>Tuma CV yako pamoja na barua fupi kunaelezea kwa nini unataka kufanya kazi MwanzoElimu kupitia WhatsApp au barua pepe:</p>
+      <div class="doc-highlight"><p>💬 <a href="https://wa.me/255743548225" target="_blank" style="color:#16a34a;font-weight:700;">+255 743 548 225</a> &nbsp;|&nbsp; 📧 <a href="mailto:jobs@mwanzoelimu.co.tz" style="color:#16a34a;font-weight:700;">jobs@mwanzoelimu.co.tz</a></p></div>
+    `
+  },
+
+  privacy: {
+    icon:'🔐', title:'Sera ya Faragha', subtitle:'Privacy Policy — MwanzoElimu',
+    body:`
+      <p class="doc-last-updated">Tarehe ya kuanza kutumika: 1 Januari 2024 &nbsp;|&nbsp; Ilisasishwa: 1 Januari 2026</p>
+
+      <h2>1. Utangulizi</h2>
+      <p>MwanzoElimu TZ ("Sisi", "Kampuni") inazingatia faragha ya watumiaji wetu. Sera hii inaeleza jinsi tunavyokusanya, kutumia na kulinda taarifa zako unapotumia huduma zetu kwenye mwanzoelimu.co.tz na programu zetu.</p>
+
+      <h2>2. Taarifa Tunazokusanya</h2>
+      <ul>
+        <li><strong>Taarifa unazotupa wewe:</strong> Jina, namba ya simu, shule, darasa</li>
+        <li><strong>Taarifa za matumizi:</strong> Masomo unayosoma, maswali unayojibu, muda wa kutumia app</li>
+        <li><strong>Taarifa za kifaa:</strong> Aina ya simu/kompyuta, mfumo wa uendeshaji, browser</li>
+        <li><strong>Taarifa za malipo:</strong> Tunatumia watoa huduma wa nje (Stripe/Selcom) — hatuwasiliani kadi za benki moja kwa moja</li>
+      </ul>
+
+      <h2>3. Jinsi Tunavyotumia Taarifa Zako</h2>
+      <ul>
+        <li>Kutoa huduma za kujifunza zilizobinafsishwa</li>
+        <li>Kutuma taarifa za mtihani, vidokezo vya masomo (SMS/WhatsApp)</li>
+        <li>Kuboresha platform yetu kulingana na matumizi</li>
+        <li>Kuzuia udanganyifu na matumizi mabaya</li>
+      </ul>
+
+      <h2>4. Kushiriki na Wengine</h2>
+      <p>Hatuuzi taarifa zako. Tunashiriki tu na:</p>
+      <ul>
+        <li>Watoa huduma wanaotusaidia (seva, malipo, analytics) — chini ya mikataba ya usiri</li>
+        <li>Mamlaka za serikali iwapo sheria inahitaji</li>
+      </ul>
+
+      <h2>5. Haki Zako</h2>
+      <ul>
+        <li>Haki ya kupata nakala ya taarifa zako</li>
+        <li>Haki ya kurekebisha taarifa zisizo sahihi</li>
+        <li>Haki ya kufuta akaunti na taarifa zako zote</li>
+        <li>Haki ya kukataa matumizi ya taarifa kwa madhumuni ya masoko</li>
+      </ul>
+
+      <h2>6. Mawasiliano</h2>
+      <div class="doc-highlight"><p>Maswali kuhusu faragha: 📧 <a href="mailto:privacy@mwanzoelimu.co.tz" style="color:#16a34a;">privacy@mwanzoelimu.co.tz</a></p></div>
+    `
+  },
+
+  terms: {
+    icon:'📋', title:'Masharti ya Huduma', subtitle:'Terms of Service — MwanzoElimu',
+    body:`
+      <p class="doc-last-updated">Tarehe ya kuanza kutumika: 1 Januari 2024 &nbsp;|&nbsp; Ilisasishwa: 1 Januari 2026</p>
+
+      <h2>1. Makubaliano</h2>
+      <p>Kwa kutumia MwanzoElimu, unakubaliana na masharti yote yaliyoandikwa hapa. Tafadhali soma kwa makini. Kama hukubaliani, tafadhali usitumie huduma zetu.</p>
+
+      <h2>2. Akaunti Yako</h2>
+      <ul>
+        <li>Lazima uwe na umri wa miaka 13 au zaidi (au na idhini ya mzazi)</li>
+        <li>Taarifa unazotupa lazima ziwe za kweli</li>
+        <li>Wewe unawajibika kwa shughuli zote zinazofanywa kwenye akaunti yako</li>
+        <li>Usiishiriki akaunti yako na mtu mwingine</li>
+      </ul>
+
+      <h2>3. Matumizi Yanayoruhusiwa</h2>
+      <ul>
+        <li>Kujifunza kwa ajili ya masomo na mitihani</li>
+        <li>Kushiriki maudhui yetu na wanafunzi wenzako (kwa madhumuni ya kujifunza)</li>
+        <li>Kutumia zana zetu za quiz na notes kwa manufaa yako</li>
+      </ul>
+
+      <h2>4. Matumizi Yasiyoruhusiwa</h2>
+      <ul>
+        <li>Kuuza au kushiriki akaunti yako kwa faida</li>
+        <li>Kutengeneza akaunti nyingi kwa lengo la kudanganya mfumo</li>
+        <li>Kupakuliwa au kunakili maudhui yetu kwa wingi bila ruhusa</li>
+        <li>Kutumia bots au programu za kiotomatiki kukagua mfumo</li>
+      </ul>
+
+      <h2>5. Malipo na Kurudisha Pesa</h2>
+      <ul>
+        <li>Ada za mwezi hazirejesheyi isipokuwa kutokana na hitilafu ya kiufundi kutoka kwetu</li>
+        <li>Mabadiliko ya bei yatatangazwa wiki 2 kabla ya kuanza kutumika</li>
+        <li>Akaunti za bure hazihitaji kadi ya benki</li>
+      </ul>
+
+      <h2>6. Kusitisha Huduma</h2>
+      <p>Tunaweza kusitisha akaunti yako bila notisi endapo utakiuka masharti haya. Unaweza kufuta akaunti yako wakati wowote kupitia mipangilio.</p>
+
+      <h2>7. Mawasiliano</h2>
+      <div class="doc-highlight"><p>Maswali: 📧 <a href="mailto:legal@mwanzoelimu.co.tz" style="color:#16a34a;">legal@mwanzoelimu.co.tz</a></p></div>
+    `
+  },
+
+  cookies: {
+    icon:'🍪', title:'Sera ya Vidakuzi', subtitle:'Cookie Policy — MwanzoElimu',
+    body:`
+      <p class="doc-last-updated">Tarehe ya kuanza kutumika: 1 Januari 2024 &nbsp;|&nbsp; Ilisasishwa: 1 Januari 2026</p>
+
+      <h2>1. Vidakuzi ni Nini?</h2>
+      <p>Vidakuzi (cookies) ni faili ndogo za maandishi ambazo zinawekwa kwenye kivinjari chako unapozuru tovuti yetu. Zinatusaidia kukukumbuka na kuboresha uzoefu wako.</p>
+
+      <h2>2. Aina za Vidakuzi Tunavyotumia</h2>
+      <ul>
+        <li><strong>Vidakuzi Muhimu:</strong> Vinavyohitajika kwa mfumo kufanya kazi (kuingia, usalama). Haiwezekani kuvizima.</li>
+        <li><strong>Vidakuzi vya Utendaji:</strong> Vinakusaidia tonzo kufanya kazi haraka. Huhifadhi taarifa zako binafsi.</li>
+        <li><strong>Vidakuzi vya Uchambuzi:</strong> Tunatumia Google Analytics kuelewa jinsi watumiaji wanavyotumia platform. Data ni ya jumla — si ya mtu mmoja mmoja.</li>
+        <li><strong>Vidakuzi vya Upendeleo:</strong> Vinakukumbuka dark mode, lugha, na mipangilio mingine yako.</li>
+      </ul>
+
+      <h2>3. Vidakuzi vya Wengine</h2>
+      <ul>
+        <li><strong>Google Analytics</strong> — Uchambuzi wa matumizi</li>
+        <li><strong>Cloudflare</strong> — Usalama na kasi ya tovuti</li>
+        <li><strong>YouTube</strong> — Video za kujifunza (ikiwa unaona video)</li>
+      </ul>
+      <p>Kampuni hizi zina sera zao za faragha. Hatudhibiti vidakuzi vyao.</p>
+
+      <h2>4. Kudhibiti Vidakuzi</h2>
+      <p>Unaweza kudhibiti vidakuzi kupitia mipangilio ya kivinjari chako:</p>
+      <ul>
+        <li><strong>Chrome:</strong> Mipangilio → Faragha → Vidakuzi</li>
+        <li><strong>Firefox:</strong> Mipangilio → Faragha na Usalama</li>
+        <li><strong>Safari:</strong> Mapendeleo → Faragha</li>
+      </ul>
+      <div class="doc-highlight"><p>⚠️ Kuzima vidakuzi muhimu kunaweza kusababisha tovuti isifanye kazi vizuri.</p></div>
+
+      <h2>5. Mawasiliano</h2>
+      <div class="doc-highlight"><p>Maswali: 📧 <a href="mailto:privacy@mwanzoelimu.co.tz" style="color:#16a34a;">privacy@mwanzoelimu.co.tz</a></p></div>
+    `
+  }
+};
+
+function openDoc(key) {
+  const doc = DOCS[key];
+  if (!doc) return;
+  const c = document.getElementById('docContainer');
+  c.innerHTML = `
+    <div class="doc-header">
+      <div class="doc-header-left">
+        <div class="doc-icon">${doc.icon}</div>
+        <div>
+          <p class="doc-title">${doc.title}</p>
+          <p class="doc-subtitle">${doc.subtitle}</p>
+        </div>
+      </div>
+      <button class="doc-close" onclick="closeDoc()">✕</button>
+    </div>
+    <div class="doc-body">${doc.body}</div>
+    <div class="doc-footer"><p>© 2026 MwanzoElimu TZ • Dar es Salaam, Tanzania</p></div>
+  `;
+  const m = document.getElementById('docModal');
+  m.classList.add('open');
+  m.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeDoc() {
+  document.getElementById('docModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ════════════════ INIT ════════════════
+applyDark();
+applyLang();
+syncLoginBtn();
+</script>
+
+<!-- ════════════════ DOCUMENT MODAL ════════════════ -->
+<div id="docModal" onclick="if(event.target===this)closeDoc()">
+  <div class="doc-container" id="docContainer"></div>
+</div>
+
+</body>
+</html>
